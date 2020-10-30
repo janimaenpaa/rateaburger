@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-community/async-storage"
 import { Center } from "./Center"
 import { AuthNavProps, AuthParamList } from "./types"
 import { AuthContext } from "./AuthProvider"
+import { AppTabs } from "./AppTabs"
 
 const Stack = createStackNavigator<AuthParamList>()
 
@@ -60,9 +61,7 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
   return (
     <NavigationContainer>
       {user ? (
-        <Center>
-          <Text>User exists</Text>
-        </Center>
+        <AppTabs />
       ) : (
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen
