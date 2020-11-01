@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { Center } from "./Center"
+import { Layout } from "./Layout"
 import { Button, Text } from "react-native"
 import { AuthContext } from "./AuthProvider"
 import { Ionicons } from "@expo/vector-icons"
@@ -13,23 +13,23 @@ const Tabs = createBottomTabNavigator()
 const Home = () => {
   const { logout } = useContext(AuthContext)
   return (
-    <Center>
+    <Layout>
       <Text>Home</Text>
       <Button title="Logout" onPress={() => logout()} />
-    </Center>
+    </Layout>
   )
 }
 
 const Map = () => (
-  <Center>
+  <Layout>
     <Text>Map</Text>
-  </Center>
+  </Layout>
 )
 
 const Burgers = () => (
-  <Center>
+  <Layout>
     <Text>Burgers</Text>
-  </Center>
+  </Layout>
 )
 
 export const AppTabs: React.FC<AppTabsProps> = ({}) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { ActivityIndicator } from "react-native"
 import AsyncStorage from "@react-native-community/async-storage"
-import { Center } from "./Center"
+import { Layout } from "./Layout"
 import { AuthContext } from "./AuthProvider"
 import { AppTabs } from "./AppTabs"
 import { AuthStack } from "./AuthStack"
@@ -32,9 +32,9 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
 
   if (loading) {
     return (
-      <Center>
+      <Layout>
         <ActivityIndicator size="large" />
-      </Center>
+      </Layout>
     )
   }
 
