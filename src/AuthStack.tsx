@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
-import { Button, Text, TouchableWithoutFeedback } from "react-native"
-import { Icon, Input } from "@ui-kitten/components"
+import { Text, TouchableWithoutFeedback } from "react-native"
+import { Button, Icon, Input, IconProps } from "@ui-kitten/components"
 import { Layout } from "./Layout"
 import { AuthNavProps, AuthParamList } from "./types"
 import { AuthContext } from "./AuthProvider"
 
-const AlertIcon: React.FC = (props: any) => <Icon {...props} name="alert-circle-outline" />
+const AlertIcon: IconProps = (props: any) => (
+  <Icon {...props} name="alert-circle-outline" />
+)
 
 const Login = ({ navigation }: AuthNavProps<"Login">) => {
   const { login } = useContext(AuthContext)
@@ -18,7 +20,7 @@ const Login = ({ navigation }: AuthNavProps<"Login">) => {
     setSecureTextEntry(!secureTextEntry)
   }
 
-  const renderIcon: React.FC = (props) => (
+    const renderIcon: IconProps = (props: any) => (
     <TouchableWithoutFeedback onPress={toggleSecureEntry}>
       <Icon {...props} name={secureTextEntry ? "eye-off" : "eye"} />
     </TouchableWithoutFeedback>
@@ -39,17 +41,27 @@ const Login = ({ navigation }: AuthNavProps<"Login">) => {
         label="password"
         placeholder="password"
         value={password}
+        accessoryRight={renderIcon}
+        captionIcon={AlertIcon}
+        secureTextEntry={secureTextEntry}
         onChangeText={(nextValue) => setPassword(nextValue)}
       />
-      <Button title="Log me in" onPress={() => login()} />
-      <Button title="Signup" onPress={() => navigation.navigate("Signup")} />
+      <Button style={{ width: "80%", margin: 5 }} onPress={() => login()}>
+        Log me in
+      </Button>
+      <Button
+        style={{ width: "80%", margin: 5 }}
+        onPress={() => navigation.navigate("Signup")}
+      >
+        Signup
+      </Button>
     </Layout>
   )
 }
 const Signup = ({ navigation }: AuthNavProps<"Signup">) => (
   <Layout>
     <Text>Signup</Text>
-    <Button title="Go back" onPress={() => navigation.goBack()} />
+    <Button onPress={() => navigation.goBack()}>Go Back</Button>
   </Layout>
 )
 
