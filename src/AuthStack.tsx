@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import { Text, TouchableWithoutFeedback } from "react-native"
 import { Button, Icon, Input, IconProps } from "@ui-kitten/components"
-import { Layout } from "./Layout"
+import { Layout } from "./components/Layout"
 import { AuthNavProps, AuthParamList } from "./types"
 import { AuthContext } from "./AuthProvider"
 

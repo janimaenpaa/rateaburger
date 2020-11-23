@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { Layout } from "./Layout"
+import { Layout } from "./components/Layout"
 import { Button, Text } from "react-native"
 import { AuthContext } from "./AuthProvider"
 import { Ionicons } from "@expo/vector-icons"
