@@ -15,25 +15,30 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
   const [burgers, setBurgers] = useState<Burger[]>([])
 
+  const fetchRestaurants = () =>
+    fetch("http://87.92.141.110:5000/api/restaurants")
+      .then((response) => response.json())
+      .then((json) => setRestaurants(json))
+      .catch((error) => console.error(error))
+
+  const fetchBurgers = () =>
+    fetch("http://87.92.141.110:5000/api/burgers")
+      .then((response) => response.json())
+      .then((json) => setBurgers(json))
+      .catch((error) => console.error(error))
+
   useEffect(() => {
-    const fetchRestaurants = () =>
-      fetch("http://87.92.237.174:5000/api/restaurants")
-        .then((response) => response.json())
-        .then((json) => setRestaurants(json))
-        .catch((error) => console.error(error))
-
-    const fetchBurgers = () =>
-      fetch("http://87.92.237.174:5000/api/burgers")
-        .then((response) => response.json())
-        .then((json) => setBurgers(json))
-        .catch((error) => console.error(error))
-
     fetchRestaurants()
     fetchBurgers()
   }, [])
 
   return (
-    <DataContext.Provider value={{ restaurants, burgers }}>
+    <DataContext.Provider
+      value={{
+        restaurants,
+        burgers,
+      }}
+    >
       {children}
     </DataContext.Provider>
   )
