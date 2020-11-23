@@ -32,6 +32,12 @@ const Burgers = () => (
   </Layout>
 )
 
+const Restaurants = () => (
+  <Layout>
+    <Text>Restaurants</Text>
+  </Layout>
+)
+
 export const AppTabs: React.FC<AppTabsProps> = ({}) => {
   return (
     <Tabs.Navigator
@@ -45,6 +51,8 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
             return <FontAwesome5 name="hamburger" size={24} color="black" />
           } else if (route.name === "Map") {
             return <FontAwesome name="map" size={24} color="black" />
+          } else if (route.name === "Restaurants") {
+            return <FontAwesome5 name="utensils" size={24} color="black" />
           }
 
           // You can return any component that you like here!
@@ -59,6 +67,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
     >
       <Tabs.Screen name="Home" component={Home}></Tabs.Screen>
       <Tabs.Screen name="Burgers" component={Burgers}></Tabs.Screen>
+      <Tabs.Screen name="Restaurants" component={Restaurants}></Tabs.Screen>
       <Tabs.Screen name="Map" component={Map}></Tabs.Screen>
     </Tabs.Navigator>
   )
