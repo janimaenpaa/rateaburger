@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { AuthContext } from "../../AuthProvider"
+import { AuthContext } from "../../providers/AuthProvider"
 import { Layout } from "../../components/Layout"
 import { Button, Text } from "react-native"
 

@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { ActivityIndicator } from "react-native"
 import AsyncStorage from "@react-native-community/async-storage"
 import { Layout } from "./components/Layout"
-import { AuthContext } from "./AuthProvider"
+import { AuthContext } from "./providers/AuthProvider"
 import { AppTabs } from "./stacks/AppTabs"
 import { AuthStack } from "./stacks/AuthStack"
 

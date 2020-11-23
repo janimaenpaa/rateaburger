@@ -1,14 +1,12 @@
 import React, { useContext, useState } from "react"
 import { Button, Icon, IconProps, Input } from "@ui-kitten/components"
 import { AuthNavProps } from "../../types"
-import { AuthContext } from "../../AuthProvider"
+import { AuthContext } from "../../providers/AuthProvider"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import { Text } from "react-native"
 import { Layout } from "../../components/Layout"
 
-interface Props {}
-
-const AlertIcon: IconProps = (props: any) => (
+const AlertIcon = (props: IconProps) => (
   <Icon {...props} name="alert-circle-outline" />
 )
 
