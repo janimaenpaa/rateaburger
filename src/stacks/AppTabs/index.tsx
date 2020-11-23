@@ -1,42 +1,16 @@
-import React, { useContext } from "react"
+import React from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { Layout } from "./components/Layout"
-import { Button, Text } from "react-native"
-import { AuthContext } from "./AuthProvider"
 import { Ionicons } from "@expo/vector-icons"
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons"
+
+import { Home } from "./Home"
+import { Burgers } from "./Burgers"
+import { Restaurants } from "./Restaurants"
+import { Map } from "./Map"
 
 interface AppTabsProps {}
 
 const Tabs = createBottomTabNavigator()
-
-const Home = () => {
-  const { logout } = useContext(AuthContext)
-  return (
-    <Layout>
-      <Text>Home</Text>
-      <Button title="Logout" onPress={() => logout()} />
-    </Layout>
-  )
-}
-
-const Map = () => (
-  <Layout>
-    <Text>Map</Text>
-  </Layout>
-)
-
-const Burgers = () => (
-  <Layout>
-    <Text>Burgers</Text>
-  </Layout>
-)
-
-const Restaurants = () => (
-  <Layout>
-    <Text>Restaurants</Text>
-  </Layout>
-)
 
 export const AppTabs: React.FC<AppTabsProps> = ({}) => {
   return (

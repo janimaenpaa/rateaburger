@@ -1,16 +1,18 @@
 import React, { useContext, useState } from "react"
-import { createStackNavigator } from "@react-navigation/stack"
-import { Text, TouchableWithoutFeedback } from "react-native"
-import { Button, Icon, Input, IconProps } from "@ui-kitten/components"
-import { Layout } from "./components/Layout"
-import { AuthNavProps, AuthParamList } from "./types"
-import { AuthContext } from "./AuthProvider"
+import { Button, Icon, IconProps, Input } from "@ui-kitten/components"
+import { AuthNavProps } from "../../types"
+import { AuthContext } from "../../AuthProvider"
+import { TouchableWithoutFeedback } from "react-native-gesture-handler"
+import { Text } from "react-native"
+import { Layout } from "../../components/Layout"
+
+interface Props {}
 
 const AlertIcon: IconProps = (props: any) => (
   <Icon {...props} name="alert-circle-outline" />
 )
 
-const Login = ({ navigation }: AuthNavProps<"Login">) => {
+export const Login = ({ navigation }: AuthNavProps<"Login">) => {
   const { login } = useContext(AuthContext)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -20,7 +22,7 @@ const Login = ({ navigation }: AuthNavProps<"Login">) => {
     setSecureTextEntry(!secureTextEntry)
   }
 
-    const renderIcon: IconProps = (props: any) => (
+  const renderIcon: IconProps = (props: any) => (
     <TouchableWithoutFeedback onPress={toggleSecureEntry}>
       <Icon {...props} name={secureTextEntry ? "eye-off" : "eye"} />
     </TouchableWithoutFeedback>
@@ -56,28 +58,5 @@ const Login = ({ navigation }: AuthNavProps<"Login">) => {
         Signup
       </Button>
     </Layout>
-  )
-}
-const Signup = ({ navigation }: AuthNavProps<"Signup">) => (
-  <Layout>
-    <Text>Signup</Text>
-    <Button onPress={() => navigation.goBack()}>Go Back</Button>
-  </Layout>
-)
-
-interface AuthStackProps {}
-
-const Stack = createStackNavigator<AuthParamList>()
-
-export const AuthStack: React.FC<AuthStackProps> = ({}) => {
-  return (
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen
-        name="Login"
-        options={{ headerShown: false }}
-        component={Login}
-      />
-      <Stack.Screen name="Signup" component={Signup} />
-    </Stack.Navigator>
   )
 }

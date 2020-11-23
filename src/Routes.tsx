@@ -4,8 +4,8 @@ import { ActivityIndicator } from "react-native"
 import AsyncStorage from "@react-native-community/async-storage"
 import { Layout } from "./components/Layout"
 import { AuthContext } from "./AuthProvider"
-import { AppTabs } from "./AppTabs"
-import { AuthStack } from "./AuthStack"
+import { AppTabs } from "./stacks/AppTabs"
+import { AuthStack } from "./stacks/AuthStack"
 
 interface RoutesProps {}
 
