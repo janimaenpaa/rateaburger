@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons"
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons"
 
 import { Home } from "./Home"
-import { Burgers } from "./Burgers"
+import { BurgerStack } from "./BurgerStack"
 import { Restaurants } from "./Restaurants"
 import { Map } from "./Map"
 
@@ -40,7 +40,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
       }}
     >
       <Tabs.Screen name="Home" component={Home}></Tabs.Screen>
-      <Tabs.Screen name="Burgers" component={Burgers}></Tabs.Screen>
+      <Tabs.Screen name="Burgers" component={BurgerStack}></Tabs.Screen>
       <Tabs.Screen name="Restaurants" component={Restaurants}></Tabs.Screen>
       <Tabs.Screen name="Map" component={Map}></Tabs.Screen>
     </Tabs.Navigator>

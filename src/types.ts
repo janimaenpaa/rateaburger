@@ -11,6 +11,15 @@ export type AuthNavProps<T extends keyof AuthParamList> = {
   route: RouteProp<AuthParamList, T>
 }
 
+export type BurgerParamList = {
+  Burgers: undefined
+  RateBurger: undefined
+}
+
+export type BurgerNavProps<T extends keyof BurgerParamList> = {
+  navigation: StackNavigationProp<BurgerParamList, T>
+}
+
 export type AppParamList = {
   Home: undefined
   Map: undefined
