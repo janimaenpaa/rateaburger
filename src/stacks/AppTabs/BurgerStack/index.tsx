@@ -3,12 +3,13 @@ import { Layout } from "../../../components/Layout"
 import { Button, Text } from "@ui-kitten/components"
 import { createStackNavigator } from "@react-navigation/stack"
 import { BurgerNavProps } from "../../../types"
+import { RateBurger } from "./RateBurger"
 
-const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => (
+/* const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => (
   <Layout>
     <Text>Rate A Burger</Text>
   </Layout>
-)
+) */
 
 const Burgers = ({ navigation }: BurgerNavProps<"Burgers">) => (
   <Layout>
