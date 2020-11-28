@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Layout } from "../../../components/Layout"
 import { BurgerNavProps, Restaurant } from "../../../types"
 import { useForm, Controller } from "react-hook-form"
@@ -10,6 +10,17 @@ import {
   Text,
 } from "@ui-kitten/components"
 import { DataContext } from "../../../providers/DataProvider"
+import { Keyboard, KeyboardEventName, Platform } from "react-native"
+
+const showEvent: KeyboardEventName = Platform.select({
+  android: "keyboardDidShow",
+  default: "keyboardWillShow",
+})
+
+const hideEvent: KeyboardEventName = Platform.select({
+  android: "keyboardDidHide",
+  default: "keyboardWillHide",
+})
 
 const filter = (restaurant: Restaurant, query: string) =>
   restaurant.name.toLowerCase().includes(query.toLowerCase())
@@ -17,14 +28,30 @@ const filter = (restaurant: Restaurant, query: string) =>
 interface RateBurgerProps {}
 
 export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
-  const [restaurant, setRestaurant] = useState<string | undefined>(undefined)
   const { restaurants } = useContext(DataContext)
+  const [restaurant, setRestaurant] = useState<string | undefined>(undefined)
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
     restaurants
   )
+  const [placement, setPlacement] = React.useState("bottom")
   console.log(restaurants)
   const { control, handleSubmit, errors } = useForm()
   const onSubmit = (data: any) => console.log(data)
+
+  useEffect(() => {
+    const keyboardShowListener = Keyboard.addListener(showEvent, () => {
+      setPlacement("top")
+    })
+
+    const keyboardHideListener = Keyboard.addListener(hideEvent, () => {
+      setPlacement("")
+    })
+
+    return () => {
+      keyboardShowListener.remove()
+      keyboardHideListener.remove()
+    }
+  })
 
   const renderOption = (item: Restaurant, index: number) => (
     <AutocompleteItem key={index} title={item.name} />
@@ -41,6 +68,8 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
     )
   }
 
+  const inputStyle = { width: "100%", marginBottom: 26 }
+
   return (
     <Layout style={{ padding: 20 }}>
       <Controller
@@ -52,7 +81,8 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
             value={restaurant}
             onSelect={onSelect}
             onChangeText={onChangeText}
-            style={{ width: "100%" }}
+            placement={placement}
+            style={inputStyle}
           >
             {filteredRestaurants.map(renderOption)}
           </Autocomplete>
@@ -70,6 +100,7 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
             onBlur={onBlur}
             onChangeText={(value) => onChange(value)}
             value={value}
+            style={inputStyle}
           />
         )}
         name="burger"
@@ -83,6 +114,7 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
             onBlur={onBlur}
             onChangeText={(value) => onChange(value)}
             value={value}
+            style={inputStyle}
           />
         )}
         name="review"
@@ -96,12 +128,12 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
             onBlur={onBlur}
             onChangeText={(value) => onChange(value)}
             value={value}
+            style={inputStyle}
           />
         )}
         name="rating"
         defaultValue=""
       />
-
       <Button onPress={handleSubmit(onSubmit)}>Submit</Button>
     </Layout>
   )
