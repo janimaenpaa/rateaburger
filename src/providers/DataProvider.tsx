@@ -16,13 +16,13 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [burgers, setBurgers] = useState<Burger[]>([])
 
   const fetchRestaurants = () =>
-    fetch("http://87.92.185.234:5000/api/restaurants")
+    fetch("https://rateaburger.herokuapp.com/api/restaurants")
       .then((response) => response.json())
       .then((json) => setRestaurants(json))
       .catch((error) => console.error(error))
 
   const fetchBurgers = () =>
-    fetch("http://87.92.185.234:5000/api/burgers")
+    fetch("https://rateaburger.herokuapp.com/api/burgers")
       .then((response) => response.json())
       .then((json) => setBurgers(json))
       .catch((error) => console.error(error))
