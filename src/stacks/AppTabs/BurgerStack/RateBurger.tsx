@@ -7,10 +7,12 @@ import {
   AutocompleteItem,
   Button,
   Input,
+  Radio,
+  RadioGroup,
   Text,
 } from "@ui-kitten/components"
 import { DataContext } from "../../../providers/DataProvider"
-import { Keyboard, KeyboardEventName, Platform } from "react-native"
+import { Keyboard, KeyboardEventName, Platform, View } from "react-native"
 
 const showEvent: KeyboardEventName = Platform.select({
   android: "keyboardDidShow",
@@ -33,8 +35,8 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
   const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
     restaurants
   )
-  const [placement, setPlacement] = React.useState("bottom")
-  console.log(restaurants)
+  const [placement, setPlacement] = useState("bottom")
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const { control, handleSubmit, errors } = useForm()
   const onSubmit = (data: any) => console.log(data)
 
@@ -44,7 +46,7 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
     })
 
     const keyboardHideListener = Keyboard.addListener(hideEvent, () => {
-      setPlacement("")
+      setPlacement("bottom")
     })
 
     return () => {
@@ -123,13 +125,25 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
-          <Input
-            label="Rating"
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-            style={inputStyle}
-          />
+          <View style={{ width: "100%" }}>
+            <Text appearance="hint">Rating</Text>
+            <RadioGroup
+              selectedIndex={selectedIndex}
+              onChange={(index) => setSelectedIndex(index)}
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                marginBottom: 20,
+              }}
+            >
+              <Radio>1</Radio>
+              <Radio>2</Radio>
+              <Radio>3</Radio>
+              <Radio>4</Radio>
+              <Radio>5</Radio>
+            </RadioGroup>
+          </View>
         )}
         name="rating"
         defaultValue=""
