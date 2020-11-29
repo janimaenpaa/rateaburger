@@ -5,6 +5,7 @@ import { Button } from "react-native"
 import { Card, List, ListItem, Text } from "@ui-kitten/components"
 import { DataContext } from "../../providers/DataProvider"
 import { Review } from "../../types"
+import { Stars } from "../../components/Stars"
 
 interface HomeProps {}
 
@@ -21,6 +22,7 @@ export const Home: React.FC<HomeProps> = () => {
       <Text style={{ fontWeight: "700", marginTop: 8 }} category="p1">
         Rating
       </Text>
+      <Stars value={item.stars} />
     </Card>
   )
 
