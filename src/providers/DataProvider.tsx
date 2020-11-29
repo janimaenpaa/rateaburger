@@ -33,7 +33,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const fetchReviews = () =>
     fetch("https://rateaburger.herokuapp.com/api/reviews")
       .then((response) => response.json())
-      .then((json) => setBurgers(json))
+      .then((json) => setReviews(json))
       .catch((error) => console.error(error))
 
   useEffect(() => {
