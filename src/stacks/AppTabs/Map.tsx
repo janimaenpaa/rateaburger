@@ -10,19 +10,17 @@ export const Map: React.FC<MapProps> = () => {
   const [region, setRegion] = useState({
     latitude: 60.169877007627676,
     longitude: 24.938366007081427,
-    latitudeDelta: 0.0322,
-    longitudeDelta: 0.0221,
+    latitudeDelta: 0.03,
+    longitudeDelta: 0.02,
   })
-
-  useEffect(() => {
-    getPhoneLocation()
-  }, [])
 
   const getPhoneLocation = async () => {
     const { status } = await Location.requestPermissionsAsync()
 
     if (status === "granted") {
-      const phoneLocation = await Location.getCurrentPositionAsync({})
+      const phoneLocation = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.High,
+      })
 
       const result = {
         ...region,
@@ -35,6 +33,11 @@ export const Map: React.FC<MapProps> = () => {
       Alert.alert("No permission to access phone location")
     }
   }
+
+  useEffect(() => {
+    getPhoneLocation()
+  }, [])
+
   return (
     <Layout>
       <MapView style={styles.mapStyle} region={region} />
