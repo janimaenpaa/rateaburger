@@ -14,6 +14,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, style }) => {
     alignItems: "center",
     justifyContent: "center",
     marginTop: Constants.statusBarHeight,
+    backgroundColor: "#F7F9FC",
     ...style,
   } as ViewStyle
   return <KittenUILayout style={styles}>{children}</KittenUILayout>
