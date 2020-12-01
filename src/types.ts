@@ -20,6 +20,15 @@ export type BurgerNavProps<T extends keyof BurgerParamList> = {
   navigation: StackNavigationProp<BurgerParamList, T>
 }
 
+export type RestaurantParamList = {
+  Restaurants: undefined
+  Restaurant: undefined
+}
+
+export type RestaurantNavProps<T extends keyof RestaurantParamList> = {
+  navigation: StackNavigationProp<RestaurantParamList, T>
+}
+
 export type AppParamList = {
   Home: undefined
   Map: undefined
