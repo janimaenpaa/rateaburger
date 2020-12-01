@@ -11,7 +11,6 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children, style }) => {
   const styles = {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
     marginTop: Constants.statusBarHeight,
     backgroundColor: "#F7F9FC",
