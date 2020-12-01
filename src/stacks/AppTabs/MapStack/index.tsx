@@ -1,18 +1,17 @@
 import React from "react"
 import { createStackNavigator } from "@react-navigation/stack"
-import { RateBurger } from "./RateBurger"
-import { BurgerList } from "./BurgerList"
+import { Map } from "./Map"
 
-interface BurgerStackProps {}
+interface MapStackProps {}
 
 const Stack = createStackNavigator()
 
-export const BurgerStack: React.FC<BurgerStackProps> = () => {
+export const MapStack: React.FC<MapStackProps> = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#FFC529",
+          backgroundColor: "#FFC529"
         },
         headerTintColor: "#fff",
         headerTitleStyle: {
@@ -20,11 +19,7 @@ export const BurgerStack: React.FC<BurgerStackProps> = () => {
         },
       }}
     >
-      <Stack.Screen
-        name="Burgers"
-        component={BurgerList}
-      />
-      <Stack.Screen name="RateBurger" component={RateBurger} />
+      <Stack.Screen name="Map" component={Map} />
     </Stack.Navigator>
   )
 }

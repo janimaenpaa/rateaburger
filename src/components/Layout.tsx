@@ -12,7 +12,6 @@ export const Layout: React.FC<LayoutProps> = ({ children, style }) => {
   const styles = {
     flex: 1,
     justifyContent: "center",
-    marginTop: Constants.statusBarHeight,
     backgroundColor: "#F7F9FC",
     ...style,
   } as ViewStyle

@@ -18,7 +18,7 @@ export const RestaurantList = ({
         <ImageBackground
           resizeMode="cover"
           style={{ width: "100%", height: 180 }}
-          source={require("../../restaurantImg.jpg")}
+          source={require("../../../restaurantImg.jpg")}
         >
           <Text
             style={{
@@ -35,15 +35,14 @@ export const RestaurantList = ({
           </Text>
         </ImageBackground>
       )}
+      onPress={() => navigation.navigate("Restaurant")}
     >
       <Text>{item.address}</Text>
     </Card>
   )
   return (
     <Layout>
-      <Text>Restaurants</Text>
       <List
-        style={{ width: "100%" }}
         data={restaurants}
         renderItem={renderItem}
       />

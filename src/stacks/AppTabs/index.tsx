@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Ionicons } from "@expo/vector-icons"
 import { FontAwesome, FontAwesome5 } from "@expo/vector-icons"
 
-import { Home } from "./Home"
+import { HomeStack } from "./HomeStack"
 import { BurgerStack } from "./BurgerStack"
 import { RestaurantStack } from "./RestaurantStack"
-import { Map } from "./Map"
+import { MapStack } from "./MapStack"
 
 interface AppTabsProps {}
 
@@ -20,13 +20,37 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
           let iconName = ""
 
           if (route.name === "Home") {
-            return <FontAwesome name="home" size={24} color="black" />
+            return (
+              <FontAwesome
+                name="home"
+                size={30}
+                color={focused ? "#148FDB" : "black"}
+              />
+            )
           } else if (route.name === "Burgers") {
-            return <FontAwesome5 name="hamburger" size={24} color="black" />
+            return (
+              <FontAwesome5
+                name="hamburger"
+                size={24}
+                color={focused ? "#148FDB" : "black"}
+              />
+            )
           } else if (route.name === "Map") {
-            return <FontAwesome name="map" size={24} color="black" />
+            return (
+              <FontAwesome
+                name="map"
+                size={24}
+                color={focused ? "#148FDB" : "black"}
+              />
+            )
           } else if (route.name === "Restaurants") {
-            return <FontAwesome5 name="utensils" size={24} color="black" />
+            return (
+              <FontAwesome5
+                name="utensils"
+                size={24}
+                color={focused ? "#148FDB" : "black"}
+              />
+            )
           }
 
           // You can return any component that you like here!
@@ -36,13 +60,15 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
       tabBarOptions={{
         tabStyle: {
           alignSelf: "center",
+          backgroundColor: "fff",
         },
+        activeTintColor: "#148FDB",
       }}
     >
-      <Tabs.Screen name="Home" component={Home}></Tabs.Screen>
+      <Tabs.Screen name="Home" component={HomeStack}></Tabs.Screen>
       <Tabs.Screen name="Burgers" component={BurgerStack}></Tabs.Screen>
       <Tabs.Screen name="Restaurants" component={RestaurantStack}></Tabs.Screen>
-      <Tabs.Screen name="Map" component={Map}></Tabs.Screen>
+      <Tabs.Screen name="Map" component={MapStack}></Tabs.Screen>
     </Tabs.Navigator>
   )
 }

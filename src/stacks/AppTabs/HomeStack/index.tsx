@@ -1,13 +1,12 @@
-import React from "react"
 import { createStackNavigator } from "@react-navigation/stack"
-import { RestaurantList } from "./RestaurantList"
-import { RestaurantPage } from "./RestaurantPage"
+import React from "react"
+import { Home } from "./Home"
 
-interface RestaurantStackProps {}
+interface HomeStackProps {}
 
 const Stack = createStackNavigator()
 
-export const RestaurantStack: React.FC<RestaurantStackProps> = () => {
+export const HomeStack: React.FC<HomeStackProps> = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -20,8 +19,7 @@ export const RestaurantStack: React.FC<RestaurantStackProps> = () => {
         },
       }}
     >
-      <Stack.Screen name="Restaurants" component={RestaurantList} />
-      <Stack.Screen name="Restaurant" component={RestaurantPage} />
+      <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   )
 }

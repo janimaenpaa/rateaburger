@@ -40,12 +40,9 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
 
   return (
     <Layout>
-      <Text style={{ margin: 10 }} category="h2">
-        Burgers
-      </Text>
       <View style={{ alignItems: "center" }}>
         <Button
-          style={{ width: "95%" }}
+          style={{ width: "95%", marginTop: 10 }}
           onPress={() => navigation.navigate("RateBurger")}
         >
           Rate A Burger

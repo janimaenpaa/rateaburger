@@ -27,6 +27,7 @@ export type RestaurantParamList = {
 
 export type RestaurantNavProps<T extends keyof RestaurantParamList> = {
   navigation: StackNavigationProp<RestaurantParamList, T>
+  route: RouteProp<RestaurantParamList, T>
 }
 
 export type AppParamList = {
