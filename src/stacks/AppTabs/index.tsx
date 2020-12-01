@@ -13,10 +13,12 @@ interface AppTabsProps {}
 const Tabs = createBottomTabNavigator()
 
 export const AppTabs: React.FC<AppTabsProps> = ({}) => {
+  
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
+          const iconColor = focused ? "#148FDB" : "black"
           let iconName = ""
 
           if (route.name === "Home") {
@@ -24,7 +26,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
               <FontAwesome
                 name="home"
                 size={30}
-                color={focused ? "#148FDB" : "black"}
+                color={iconColor}
               />
             )
           } else if (route.name === "Burgers") {
@@ -32,7 +34,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
               <FontAwesome5
                 name="hamburger"
                 size={24}
-                color={focused ? "#148FDB" : "black"}
+                color={iconColor}
               />
             )
           } else if (route.name === "Map") {
@@ -40,7 +42,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
               <FontAwesome
                 name="map"
                 size={24}
-                color={focused ? "#148FDB" : "black"}
+                color={iconColor}
               />
             )
           } else if (route.name === "Restaurants") {
@@ -48,7 +50,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
               <FontAwesome5
                 name="utensils"
                 size={24}
-                color={focused ? "#148FDB" : "black"}
+                color={iconColor}
               />
             )
           }
