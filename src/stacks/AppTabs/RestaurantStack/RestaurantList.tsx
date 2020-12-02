@@ -1,8 +1,8 @@
 import React, { useContext } from "react"
 import { Container } from "../../../components/Container"
-import { ImageBackground, Text } from "react-native"
+import { Image } from "react-native"
 import { DataContext } from "../../../providers/DataProvider"
-import { Card, List } from "@ui-kitten/components"
+import { Card, Layout, List, Text } from "@ui-kitten/components"
 import { Restaurant, RestaurantNavProps } from "../../../types"
 
 export const RestaurantList = ({
@@ -15,29 +15,28 @@ export const RestaurantList = ({
     <Card
       style={{ flex: 1, margin: 10 }}
       header={() => (
-        <ImageBackground
+        <Image
           resizeMode="cover"
-          style={{ width: "100%", height: 180 }}
+          style={{ width: "100%", height: 160 }}
           source={require("../../../restaurantImg.jpg")}
-        >
-          <Text
-            style={{
-              color: "white",
-              fontSize: 36,
-              fontWeight: "bold",
-              alignContent: "flex-end",
-              alignItems: "flex-end",
-              backgroundColor: "rgba(0, 0, 0, 0.2)",
-              padding: 10,
-            }}
-          >
-            {item.name}
+        />
+      )}
+      footer={() => (
+        <Layout style={{margin: 10, marginLeft: 20 }}>
+          <Text style={{color: "#636363"}}>
+            burgers: {item.burgers.length} | rating: 4.5 / 5.0
           </Text>
-        </ImageBackground>
+        </Layout>
       )}
       onPress={() => navigation.navigate("Restaurant", item)}
     >
-      <Text>{item.address}</Text>
+      <Text style={{ fontWeight: "bold" }} category="h6">
+        {item.name}
+      </Text>
+      <Text>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+        fermentum ante eu nulla luctus, at ornare lorem convallis.
+      </Text>
     </Card>
   )
   return (

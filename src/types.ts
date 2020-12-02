@@ -48,6 +48,7 @@ export type Restaurant = {
   address: string
   imgUrl: string | null
   coordinates: Coordinates
+  burgers: Burger[]
 }
 
 export enum Patty {
