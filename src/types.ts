@@ -45,8 +45,9 @@ export type Coordinates = {
 export type Restaurant = {
   id: string
   name: string
+  description: string
   address: string
-  imgUrl: string | null
+  imgUrl: string
   coordinates: Coordinates
   burgers: Burger[]
 }

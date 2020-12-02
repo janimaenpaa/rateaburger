@@ -34,8 +34,7 @@ export const RestaurantList = ({
         {item.name}
       </Text>
       <Text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-        fermentum ante eu nulla luctus, at ornare lorem convallis.
+        {item.description}
       </Text>
     </Card>
   )
