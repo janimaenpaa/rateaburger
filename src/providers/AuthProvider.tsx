@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import AsyncStorage from "@react-native-community/async-storage"
+import { SignupData } from "../types"
 
 type User = null | { email: string }
 
@@ -7,10 +8,12 @@ export const AuthContext = React.createContext<{
   user: User
   login: () => void
   logout: () => void
+  signup: (data: SignupData) => void
 }>({
   user: null,
   login: () => {},
   logout: () => {},
+  signup: () => {},
 })
 
 interface AuthProviderProps {}
@@ -29,6 +32,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         logout: () => {
           setUser(null)
           AsyncStorage.removeItem("user")
+        },
+        signup: (data: SignupData) => {
+          fetch("https://rateaburger.herokuapp.com/api/users", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => console.log(response.json()))
+            .catch((error) => console.log(error))
         },
       }}
     >

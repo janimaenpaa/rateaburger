@@ -84,3 +84,15 @@ export type Burger = {
   restaurant: Restaurant
   reviews: Review[]
 }
+
+export type LoginData = {
+  email: string
+  password: string
+}
+
+export type SignupData = {
+  email: string
+  firstName: string
+  lastName: string
+  password: string
+}
