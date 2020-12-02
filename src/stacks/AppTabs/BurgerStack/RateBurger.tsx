@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Layout } from "../../../components/Layout"
+import { Container } from "../../../components/Container"
 import { BurgerNavProps, Restaurant } from "../../../types"
 import { useForm, Controller } from "react-hook-form"
 import {
@@ -26,8 +26,6 @@ const hideEvent: KeyboardEventName = Platform.select({
 
 const filter = (restaurant: Restaurant, query: string) =>
   restaurant.name.toLowerCase().includes(query.toLowerCase())
-
-interface RateBurgerProps {}
 
 export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
   const { restaurants } = useContext(DataContext)
@@ -73,7 +71,7 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
   const inputStyle = { width: "100%", marginBottom: 26 }
 
   return (
-    <Layout style={{ padding: 20 }}>
+    <Container style={{ padding: 20 }}>
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
@@ -149,6 +147,6 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
         defaultValue=""
       />
       <Button onPress={handleSubmit(onSubmit)}>Submit</Button>
-    </Layout>
+    </Container>
   )
 }

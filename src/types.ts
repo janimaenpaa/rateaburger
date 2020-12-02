@@ -22,7 +22,7 @@ export type BurgerNavProps<T extends keyof BurgerParamList> = {
 
 export type RestaurantParamList = {
   Restaurants: undefined
-  Restaurant: undefined
+  Restaurant: Restaurant
 }
 
 export type RestaurantNavProps<T extends keyof RestaurantParamList> = {

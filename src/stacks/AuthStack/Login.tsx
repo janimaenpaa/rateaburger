@@ -4,7 +4,7 @@ import { AuthNavProps } from "../../types"
 import { AuthContext } from "../../providers/AuthProvider"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import { Text } from "react-native"
-import { Layout } from "../../components/Layout"
+import { Container } from "../../components/Container"
 
 const AlertIcon = (props: IconProps) => (
   <Icon {...props} name="alert-circle-outline" />
@@ -27,7 +27,7 @@ export const Login = ({ navigation }: AuthNavProps<"Login">) => {
   )
 
   return (
-    <Layout>
+    <Container>
       <Text>Login</Text>
       <Input
         style={{ width: "80%", margin: 5 }}
@@ -55,6 +55,6 @@ export const Login = ({ navigation }: AuthNavProps<"Login">) => {
       >
         Signup
       </Button>
-    </Layout>
+    </Container>
   )
 }

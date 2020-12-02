@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Layout } from "../../../components/Layout"
+import { Container } from "../../../components/Container"
 import { ImageBackground, Text } from "react-native"
 import { DataContext } from "../../../providers/DataProvider"
 import { Card, List } from "@ui-kitten/components"
@@ -35,17 +35,14 @@ export const RestaurantList = ({
           </Text>
         </ImageBackground>
       )}
-      onPress={() => navigation.navigate("Restaurant")}
+      onPress={() => navigation.navigate("Restaurant", item)}
     >
       <Text>{item.address}</Text>
     </Card>
   )
   return (
-    <Layout>
-      <List
-        data={restaurants}
-        renderItem={renderItem}
-      />
-    </Layout>
+    <Container>
+      <List data={restaurants} renderItem={renderItem} />
+    </Container>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { Image, ImageBackground, View } from "react-native"
 import { Button, Card, Text, List } from "@ui-kitten/components"
-import { Layout } from "../../../components/Layout"
+import { Container } from "../../../components/Container"
 import { Burger, BurgerNavProps } from "../../../types"
 import { DataContext } from "../../../providers/DataProvider"
 
@@ -39,7 +39,7 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
   )
 
   return (
-    <Layout>
+    <Container>
       <View style={{ alignItems: "center" }}>
         <Button
           style={{ width: "95%", marginTop: 10 }}
@@ -49,6 +49,6 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
         </Button>
       </View>
       <List style={{ width: "100%" }} data={burgers} renderItem={renderItem} />
-    </Layout>
+    </Container>
   )
 }

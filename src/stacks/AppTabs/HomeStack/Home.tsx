@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { AuthContext } from "../../../providers/AuthProvider"
-import { Layout } from "../../../components/Layout"
+import { Container } from "../../../components/Container"
 import { Button } from "react-native"
 import { Card, List, ListItem, Text } from "@ui-kitten/components"
 import { DataContext } from "../../../providers/DataProvider"
@@ -27,10 +27,10 @@ export const Home: React.FC<HomeProps> = () => {
   )
 
   return (
-    <Layout>
+    <Container>
       <Button title="Logout" onPress={() => logout()} />
       <Text category="h2">Feed</Text>
       <List style={{ width: "100%" }} data={reviews} renderItem={renderItem} />
-    </Layout>
+    </Container>
   )
 }

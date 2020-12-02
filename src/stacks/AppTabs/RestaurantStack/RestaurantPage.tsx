@@ -1,13 +1,27 @@
 import React from "react"
-import { Layout } from "../../../components/Layout"
+import { Container } from "../../../components/Container"
 import { Text } from "@ui-kitten/components"
+import { ImageBackground } from "react-native"
+import { RestaurantNavProps } from "../../../types"
 
-interface RestaurantPageProps {}
+export const RestaurantPage = ({ route }: RestaurantNavProps<"Restaurant">) => {
+  const { imgUrl, name, address } = route.params
 
-export const RestaurantPage: React.FC<RestaurantPageProps> = () => {
+  const Img = imgUrl ? { uri: imgUrl } : require("../../../restaurantImg.jpg")
+
   return (
-    <Layout>
-      <Text>RestaurantPage</Text>
-    </Layout>
+    <Container style={{ justifyContent: "flex-start" }}>
+      <ImageBackground
+        resizeMode="cover"
+        style={{ width: "100%", height: 300 }}
+        source={Img}
+      >
+        <Text style={{ color: "white" }} category="h2">
+          5.0
+        </Text>
+      </ImageBackground>
+      <Text category="h2">{name}</Text>
+      <Text>{address}</Text>
+    </Container>
   )
 }
