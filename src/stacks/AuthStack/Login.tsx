@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react"
-import { Button, Icon, IconProps, Input } from "@ui-kitten/components"
+import { Button, Icon, IconProps, Input, Text } from "@ui-kitten/components"
 import { AuthNavProps } from "../../types"
 import { AuthContext } from "../../providers/AuthProvider"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
-import { Text } from "react-native"
 import { Container } from "../../components/Container"
 
 const AlertIcon = (props: IconProps) => (
@@ -27,8 +26,8 @@ export const Login = ({ navigation }: AuthNavProps<"Login">) => {
   )
 
   return (
-    <Container>
-      <Text>Login</Text>
+    <Container style={{ alignItems: "center" }}>
+      <Text category="h2">Login</Text>
       <Input
         style={{ width: "80%", margin: 5 }}
         label="email"

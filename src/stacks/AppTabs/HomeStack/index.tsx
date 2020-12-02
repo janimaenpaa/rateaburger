@@ -19,7 +19,11 @@ export const HomeStack: React.FC<HomeStackProps> = () => {
         },
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ title: "RateABurger" }}
+      />
     </Stack.Navigator>
   )
 }
