@@ -62,7 +62,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
       tabBarOptions={{
         tabStyle: {
           alignSelf: "center",
-          backgroundColor: "fff",
+          backgroundColor: "#fff",
         },
         activeTintColor: "#148FDB",
       }}
