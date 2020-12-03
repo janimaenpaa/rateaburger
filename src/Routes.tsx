@@ -10,13 +10,18 @@ import { AuthStack } from "./stacks/AuthStack"
 interface RoutesProps {}
 
 export const Routes: React.FC<RoutesProps> = ({}) => {
-  const { user, login } = useContext(AuthContext)
+  const { user, setUserFromStorage } = useContext(AuthContext)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     AsyncStorage.getItem("user")
-      .then(() => {
-        setLoading(false)
+      .then((user) => {
+        if (user) {
+          setUserFromStorage(user)
+          setLoading(false)
+        } else {
+          setLoading(false)
+        }
       })
       .catch((error) => console.log(error))
   }, [])

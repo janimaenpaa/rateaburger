@@ -9,11 +9,13 @@ type User = null | {
 
 export const AuthContext = React.createContext<{
   user: User
+  setUserFromStorage: (user: any) => void
   login: (user: User) => void
   logout: () => void
   signup: (data: SignupData) => void
 }>({
   user: null,
+  setUserFromStorage: () => {},
   login: () => {},
   logout: () => {},
   signup: () => {},
@@ -27,6 +29,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        setUserFromStorage: (user: any) => {
+          if (user.token) {
+            setUser(user)
+          }
+        },
         login: (user: User) => {
           fetch("https://rateaburger.herokuapp.com/api/login", {
             method: "POST",
