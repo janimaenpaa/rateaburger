@@ -18,12 +18,12 @@ export const RestaurantList = ({
         <Image
           resizeMode="cover"
           style={{ width: "100%", height: 160 }}
-          source={require("../../../restaurantImg.jpg")}
+          source={{ uri: item.imgUrl }}
         />
       )}
       footer={() => (
-        <Layout style={{margin: 10, marginLeft: 20 }}>
-          <Text style={{color: "#636363"}}>
+        <Layout style={{ margin: 10, marginLeft: 20 }}>
+          <Text style={{ color: "#636363" }}>
             burgers: {item.burgers.length} | rating: 4.5 / 5.0
           </Text>
         </Layout>
@@ -33,9 +33,7 @@ export const RestaurantList = ({
       <Text style={{ fontWeight: "bold" }} category="h6">
         {item.name}
       </Text>
-      <Text>
-        {item.description}
-      </Text>
+      <Text>{item.description}</Text>
     </Card>
   )
   return (

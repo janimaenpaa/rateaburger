@@ -29,10 +29,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
-        setUserFromStorage: (user: any) => {
-          if (user.token) {
-            setUser(user)
-          }
+        setUserFromStorage: (storageUser: any) => {
+            setUser(storageUser)
         },
         login: (user: User) => {
           fetch("https://rateaburger.herokuapp.com/api/login", {
