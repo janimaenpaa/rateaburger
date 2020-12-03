@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext } from "react"
 import {
   Button,
   Icon,
@@ -10,14 +10,19 @@ import {
 import { useForm, Controller } from "react-hook-form"
 import { Container } from "../../components/Container"
 import { AuthNavProps, SignupData } from "../../types"
+import { AuthContext } from "../../providers/AuthProvider"
 
 const AlertIcon = (props: IconProps) => (
   <Icon {...props} name="alert-circle-outline" />
 )
 
 export const Signup = ({ navigation }: AuthNavProps<"Signup">) => {
+  const { signup } = useContext(AuthContext)
   const { control, handleSubmit, errors } = useForm()
-  const onSubmit = (data: SignupData) => console.log(data)
+  const onSubmit = (data: SignupData) => {
+    signup(data)
+    navigation.goBack()
+  }
 
   const inputStyle = { width: "100%", marginBottom: 16 }
 

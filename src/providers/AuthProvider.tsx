@@ -42,7 +42,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             },
             body: JSON.stringify(data),
           })
-            .then((response) => console.log(response.json()))
+            .then((response) => response.json())
+            .then((json) => console.log(json))
             .catch((error) => console.log(error))
         },
       }}
