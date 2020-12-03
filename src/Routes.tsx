@@ -15,19 +15,10 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
 
   useEffect(() => {
     AsyncStorage.getItem("user")
-      .then((user) => {
-        console.log(user)
-        if (user) {
-          //do something
-          login()
-          setLoading(false)
-        } else {
-          setLoading(false)
-        }
+      .then(() => {
+        setLoading(false)
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => console.log(error))
   }, [])
 
   if (loading) {

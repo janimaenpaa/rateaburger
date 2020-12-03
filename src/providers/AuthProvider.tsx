@@ -2,11 +2,14 @@ import React, { useState } from "react"
 import AsyncStorage from "@react-native-community/async-storage"
 import { SignupData } from "../types"
 
-type User = null | { email: string }
+type User = null | {
+  email: string
+  password: string
+}
 
 export const AuthContext = React.createContext<{
   user: User
-  login: () => void
+  login: (user: User) => void
   logout: () => void
   signup: (data: SignupData) => void
 }>({
@@ -24,10 +27,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
-        login: () => {
-          const testUser = { email: "matti@abc.com" }
-          setUser(testUser)
-          AsyncStorage.setItem("user", JSON.stringify(testUser))
+        login: (user: User) => {
+          fetch("https://rateaburger.herokuapp.com/api/login", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((response) => response.json())
+            .then((response) => {
+              if (response.token) {
+                console.log(response)
+                setUser(response)
+                AsyncStorage.setItem("user", JSON.stringify(response))
+              } else {
+                console.log(response)
+              }
+            })
+            .catch((error) => console.log(error))
         },
         logout: () => {
           setUser(null)

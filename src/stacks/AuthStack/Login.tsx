@@ -46,7 +46,7 @@ export const Login = ({ navigation }: AuthNavProps<"Login">) => {
         secureTextEntry={secureTextEntry}
         onChangeText={(nextValue) => setPassword(nextValue)}
       />
-      <Button style={styles.button} onPress={() => login()}>
+      <Button style={styles.button} onPress={() => login({ email, password })}>
         Log me in
       </Button>
       <Button
