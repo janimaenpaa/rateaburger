@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 import { Button, Icon, IconProps, Input, Text } from "@ui-kitten/components"
+import { StyleSheet } from "react-native"
 import { AuthNavProps } from "../../types"
 import { AuthContext } from "../../providers/AuthProvider"
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
@@ -26,17 +27,17 @@ export const Login = ({ navigation }: AuthNavProps<"Login">) => {
   )
 
   return (
-    <Container style={{ alignItems: "center" }}>
+    <Container style={styles.container}>
       <Text category="h2">Login</Text>
       <Input
-        style={{ width: "80%", margin: 5 }}
+        style={styles.input}
         label="email"
         placeholder="email"
         value={email}
         onChangeText={(nextValue) => setEmail(nextValue)}
       />
       <Input
-        style={{ width: "80%", margin: 5 }}
+        style={styles.input}
         label="password"
         placeholder="password"
         value={password}
@@ -45,11 +46,11 @@ export const Login = ({ navigation }: AuthNavProps<"Login">) => {
         secureTextEntry={secureTextEntry}
         onChangeText={(nextValue) => setPassword(nextValue)}
       />
-      <Button style={{ width: "80%", margin: 5 }} onPress={() => login()}>
+      <Button style={styles.button} onPress={() => login()}>
         Log me in
       </Button>
       <Button
-        style={{ width: "80%", margin: 5 }}
+        style={styles.button}
         onPress={() => navigation.navigate("Signup")}
       >
         Signup
@@ -57,3 +58,18 @@ export const Login = ({ navigation }: AuthNavProps<"Login">) => {
     </Container>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+  },
+  input: {
+    width: "80%",
+    margin: 5,
+    backgroundColor: "#fff",
+  },
+  button: {
+    width: "80%",
+    margin: 5,
+  },
+})
