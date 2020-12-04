@@ -2,6 +2,7 @@ import React from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import { RateBurger } from "./RateBurger"
 import { BurgerList } from "./BurgerList"
+import { AddBurger } from "./AddBurger"
 
 interface BurgerStackProps {}
 
@@ -20,11 +21,9 @@ export const BurgerStack: React.FC<BurgerStackProps> = () => {
         },
       }}
     >
-      <Stack.Screen
-        name="Burgers"
-        component={BurgerList}
-      />
+      <Stack.Screen name="Burgers" component={BurgerList} />
       <Stack.Screen name="RateBurger" component={RateBurger} />
+      <Stack.Screen name="AddBurger" component={AddBurger} />
     </Stack.Navigator>
   )
 }

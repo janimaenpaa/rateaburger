@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
-import { Image, ImageBackground, View } from "react-native"
-import { Button, Card, Text, List } from "@ui-kitten/components"
+import { Image, ImageBackground, View, StyleSheet } from "react-native"
+import { Button, Card, Text, List, Layout } from "@ui-kitten/components"
 import { Container } from "../../../components/Container"
 import { Burger, BurgerNavProps } from "../../../types"
 import { DataContext } from "../../../providers/DataProvider"
@@ -39,16 +39,44 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
   )
 
   return (
-    <Container>
-      <View style={{ alignItems: "center" }}>
+    <Container style={styles.container}>
+      <Layout style={styles.buttonView}>
         <Button
-          style={{ width: "95%", marginTop: 10 }}
+          style={styles.rateButton}
           onPress={() => navigation.navigate("RateBurger")}
         >
-          Rate A Burger
+          Rate burger
         </Button>
-      </View>
-      <List style={{ width: "100%" }} data={burgers} renderItem={renderItem} />
+        <Button
+          status="info"
+          style={styles.addButton}
+          onPress={() => navigation.navigate("AddBurger")}
+        >
+          Add burger
+        </Button>
+      </Layout>
+      <List style={styles.list} data={burgers} renderItem={renderItem} />
     </Container>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+  },
+  buttonView: {
+    flexDirection: "row",
+    marginTop: 10,
+  },
+  rateButton: {
+    width: "46%",
+    margin: 5,
+  },
+  addButton: {
+    width: "46%",
+    margin: 5,
+  },
+  list: {
+    width: "100%",
+  },
+})

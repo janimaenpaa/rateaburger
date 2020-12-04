@@ -14,6 +14,7 @@ export type AuthNavProps<T extends keyof AuthParamList> = {
 export type BurgerParamList = {
   Burgers: undefined
   RateBurger: undefined
+  AddBurger: undefined
 }
 
 export type BurgerNavProps<T extends keyof BurgerParamList> = {
