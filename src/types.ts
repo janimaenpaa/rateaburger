@@ -70,12 +70,19 @@ export enum Star {
   Five = 5,
 }
 
+export type User = {
+  id: string
+  email: string
+  firstName: string
+  lastName: string
+}
+
 export type Review = {
   id: string
   description: string
   stars: number
   time: Date
-  user: any
+  user: User
   burger: Burger
 }
 
