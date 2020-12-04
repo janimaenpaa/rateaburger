@@ -1,6 +1,7 @@
-import { createStackNavigator } from "@react-navigation/stack"
 import React from "react"
+import { createStackNavigator } from "@react-navigation/stack"
 import { Home } from "./Home"
+import { LogoutButton } from "../../../components/LogoutButton"
 
 interface HomeStackProps {}
 
@@ -10,6 +11,7 @@ export const HomeStack: React.FC<HomeStackProps> = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerRight: () => <LogoutButton />,
         headerStyle: {
           backgroundColor: "#FFC529",
         },

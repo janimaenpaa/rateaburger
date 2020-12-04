@@ -2,6 +2,7 @@ import React from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import { RestaurantList } from "./RestaurantList"
 import { RestaurantPage } from "./RestaurantPage"
+import { LogoutButton } from "../../../components/LogoutButton"
 
 interface RestaurantStackProps {}
 
@@ -11,6 +12,7 @@ export const RestaurantStack: React.FC<RestaurantStackProps> = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        headerRight: () => <LogoutButton />,
         headerStyle: {
           backgroundColor: "#FFC529",
         },
