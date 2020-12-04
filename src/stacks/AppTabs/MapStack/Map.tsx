@@ -53,7 +53,7 @@ export const Map: React.FC<MapProps> = () => {
 
   return (
     <Container>
-      <MapView style={styles.mapStyle} region={region}>
+      <MapView style={styles.mapStyle} showsUserLocation region={region}>
         {markers}
       </MapView>
     </Container>
