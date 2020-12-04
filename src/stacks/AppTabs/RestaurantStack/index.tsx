@@ -23,7 +23,11 @@ export const RestaurantStack: React.FC<RestaurantStackProps> = () => {
       }}
     >
       <Stack.Screen name="Restaurants" component={RestaurantList} />
-      <Stack.Screen name="Restaurant" component={RestaurantPage} />
+      <Stack.Screen
+        name="Restaurant"
+        component={RestaurantPage}
+        options={{ title: "Restaurant" }}
+      />
     </Stack.Navigator>
   )
 }

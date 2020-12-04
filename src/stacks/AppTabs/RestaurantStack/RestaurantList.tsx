@@ -24,13 +24,13 @@ export const RestaurantList = ({
       footer={() => (
         <Layout style={{ margin: 10, marginLeft: 20 }}>
           <Text style={{ color: "#636363" }}>
-            burgers: {item.burgers.length} | rating: 4.5 / 5.0
+            burgers: {item.burgers.length} 
           </Text>
         </Layout>
       )}
       onPress={() => navigation.navigate("Restaurant", item)}
     >
-      <Text style={{ fontWeight: "bold" }} category="h6">
+      <Text >
         {item.name}
       </Text>
       <Text>{item.description}</Text>

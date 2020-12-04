@@ -13,12 +13,14 @@ export type AuthNavProps<T extends keyof AuthParamList> = {
 
 export type BurgerParamList = {
   Burgers: undefined
+  Burger: Burger
   RateBurger: undefined
   AddBurger: undefined
 }
 
 export type BurgerNavProps<T extends keyof BurgerParamList> = {
   navigation: StackNavigationProp<BurgerParamList, T>
+  route: RouteProp<BurgerParamList, T>
 }
 
 export type RestaurantParamList = {
@@ -71,7 +73,7 @@ export enum Star {
 export type Review = {
   id: string
   description: string
-  stars: Star
+  stars: number
   time: Date
   user: any
   burger: Burger
@@ -80,8 +82,10 @@ export type Review = {
 export type Burger = {
   id: string
   name: string
+  description: string
   patty: Patty
   imgUrl: string
+  date: Date
   restaurant: Restaurant
   reviews: Review[]
 }

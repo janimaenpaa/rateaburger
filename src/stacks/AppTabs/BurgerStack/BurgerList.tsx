@@ -1,9 +1,10 @@
 import React, { useContext } from "react"
-import { Image, ImageBackground, View, StyleSheet } from "react-native"
+import { Image, StyleSheet } from "react-native"
 import { Button, Card, Text, List, Layout } from "@ui-kitten/components"
 import { Container } from "../../../components/Container"
 import { Burger, BurgerNavProps } from "../../../types"
 import { DataContext } from "../../../providers/DataProvider"
+import { averageRating } from "../../../utils"
 
 export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
   const { burgers } = useContext(DataContext)
@@ -11,30 +12,28 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
   const renderItem = ({ item }: { item: Burger }) => (
     <Card
       style={{ flex: 1, margin: 10 }}
+      onPress={() => navigation.navigate("Burger", item)}
       header={() => (
-        <ImageBackground
+        <Image
           resizeMode="cover"
           style={{ width: "100%", height: 180 }}
           source={{ uri: item.imgUrl }}
-        >
-          <Text
-            style={{
-              color: "white",
-              fontSize: 36,
-              fontWeight: "bold",
-              textAlign: "right",
-              alignContent: "flex-end",
-              alignItems: "flex-end",
-              backgroundColor: "rgba(0, 0, 0, 0.2)",
-              padding: 10,
-            }}
-          >
-            4.5 / 5.0
-          </Text>
-        </ImageBackground>
+        />
+      )}
+      footer={() => (
+        <Text style={styles.rating} category="s1" appearance="hint">
+          rating {averageRating(item.reviews)} / 5.0 | {item.reviews.length}{" "}
+          reviews
+        </Text>
       )}
     >
-      <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
+      <Text style={{ fontWeight: "bold" }} category="h6">
+        {item.name}
+      </Text>
+      <Text style={{ marginBottom: 8 }} appearance="hint">
+        {item.restaurant.name}
+      </Text>
+      <Text>{item.description}</Text>
     </Card>
   )
 
@@ -78,5 +77,9 @@ const styles = StyleSheet.create({
   },
   list: {
     width: "100%",
+  },
+  rating: {
+    marginLeft: 20,
+    padding: 4,
   },
 })
