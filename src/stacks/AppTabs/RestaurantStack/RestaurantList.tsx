@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { Container } from "../../../components/Container"
 import { Image } from "react-native"
 import { DataContext } from "../../../providers/DataProvider"
-import { Card, Layout, List, Text } from "@ui-kitten/components"
+import { Button, Card, Layout, List, Text } from "@ui-kitten/components"
 import { Restaurant, RestaurantNavProps } from "../../../types"
 
 export const RestaurantList = ({
@@ -45,6 +45,12 @@ export const RestaurantList = ({
 
   return (
     <Container>
+      <Button
+        style={{ margin: 10, marginTop: 20 }}
+        onPress={() => navigation.navigate("AddRestaurant")}
+      >
+        ADD RESTAURANT
+      </Button>
       <List data={restaurants} renderItem={renderItem} />
     </Container>
   )

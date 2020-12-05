@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { RestaurantList } from "./RestaurantList"
 import { RestaurantPage } from "./RestaurantPage"
 import { LogoutButton } from "../../../components/LogoutButton"
+import { AddRestaurant } from "./AddRestaurant"
 
 interface RestaurantStackProps {}
 
@@ -27,6 +28,11 @@ export const RestaurantStack: React.FC<RestaurantStackProps> = () => {
         name="Restaurant"
         component={RestaurantPage}
         options={{ title: "Restaurant" }}
+      />
+      <Stack.Screen
+        name="AddRestaurant"
+        component={AddRestaurant}
+        options={{ title: "Add Restaurant" }}
       />
     </Stack.Navigator>
   )
