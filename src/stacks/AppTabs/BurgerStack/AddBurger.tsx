@@ -25,11 +25,8 @@ interface IFormInput {
 }
 
 export const AddBurger = ({ navigation }: BurgerNavProps<"AddBurger">) => {
-  const { burgers, restaurants } = useContext(DataContext)
-  const [selectedIndex, setSelectedIndex] = useState<IndexPath | IndexPath[]>(
-    new IndexPath(0)
-  )
-  const { control, handleSubmit, register, errors } = useForm<IFormInput>()
+  const { restaurants } = useContext(DataContext)
+  const { control, handleSubmit, errors } = useForm()
   const onSubmit = (data: any) => console.log(data)
   return (
     <Container>
@@ -39,7 +36,8 @@ export const AddBurger = ({ navigation }: BurgerNavProps<"AddBurger">) => {
           render={({ onChange, onBlur, value }) => (
             <Input
               style={styles.input}
-              label="Burger name"
+              label="Burger"
+              placeholder="Burger name here..."
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
@@ -47,7 +45,14 @@ export const AddBurger = ({ navigation }: BurgerNavProps<"AddBurger">) => {
           )}
           name="name"
           defaultValue=""
+          rules={{ required: true }}
         />
+        {errors.name && (
+          <Text style={{ marginBottom: 10 }} status="danger">
+            Burger name is required.
+          </Text>
+        )}
+
         <Controller
           control={control}
           render={({ onChange, onBlur, value }) => (
@@ -61,7 +66,14 @@ export const AddBurger = ({ navigation }: BurgerNavProps<"AddBurger">) => {
           )}
           name="description"
           defaultValue=""
+          rules={{ required: true }}
         />
+        {errors.description && (
+          <Text style={{ marginBottom: 10 }} status="danger">
+            Description is required.
+          </Text>
+        )}
+
         <Text style={{ marginBottom: 3 }} category="c2" appearance="hint">
           Patty
         </Text>
@@ -79,7 +91,14 @@ export const AddBurger = ({ navigation }: BurgerNavProps<"AddBurger">) => {
           )}
           name="patty"
           defaultValue="beef"
+          rules={{ required: true }}
         />
+        {errors.patty && (
+          <Text style={{ marginBottom: 10 }} status="danger">
+            Patty is required.
+          </Text>
+        )}
+
         <Text style={{ marginBottom: 3 }} category="c2" appearance="hint">
           Restaurant
         </Text>
@@ -100,7 +119,13 @@ export const AddBurger = ({ navigation }: BurgerNavProps<"AddBurger">) => {
           )}
           name="restaurant"
           defaultValue={restaurants[0].name || ""}
+          rules={{ required: true }}
         />
+        {errors.restaurant && (
+          <Text style={{ marginBottom: 10 }} status="danger">
+            Restaurant is required.
+          </Text>
+        )}
 
         <Button onPress={handleSubmit(onSubmit)}>Submit</Button>
       </Layout>
@@ -121,6 +146,5 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#fff",
-    marginBottom: 10,
   },
 })

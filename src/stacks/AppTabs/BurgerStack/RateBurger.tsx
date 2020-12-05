@@ -1,152 +1,170 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
 import { Container } from "../../../components/Container"
-import { BurgerNavProps, Restaurant } from "../../../types"
+import { BurgerNavProps } from "../../../types"
 import { useForm, Controller } from "react-hook-form"
 import {
-  Autocomplete,
-  AutocompleteItem,
   Button,
   Input,
+  Layout,
   Radio,
   RadioGroup,
   Text,
 } from "@ui-kitten/components"
 import { DataContext } from "../../../providers/DataProvider"
-import { Keyboard, KeyboardEventName, Platform, View } from "react-native"
-
-const showEvent: KeyboardEventName = Platform.select({
-  android: "keyboardDidShow",
-  default: "keyboardWillShow",
-})
-
-const hideEvent: KeyboardEventName = Platform.select({
-  android: "keyboardDidHide",
-  default: "keyboardWillHide",
-})
-
-const filter = (restaurant: Restaurant, query: string) =>
-  restaurant.name.toLowerCase().includes(query.toLowerCase())
+import { View, StyleSheet } from "react-native"
+import { Picker } from "@react-native-picker/picker"
 
 export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
   const { restaurants } = useContext(DataContext)
-  const [restaurant, setRestaurant] = useState<string | undefined>(undefined)
-  const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>(
-    restaurants
-  )
-  const [placement, setPlacement] = useState("bottom")
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(4)
   const { control, handleSubmit, errors } = useForm()
   const onSubmit = (data: any) => console.log(data)
-
-  useEffect(() => {
-    const keyboardShowListener = Keyboard.addListener(showEvent, () => {
-      setPlacement("top")
-    })
-
-    const keyboardHideListener = Keyboard.addListener(hideEvent, () => {
-      setPlacement("bottom")
-    })
-
-    return () => {
-      keyboardShowListener.remove()
-      keyboardHideListener.remove()
-    }
-  })
-
-  const renderOption = (item: Restaurant, index: number) => (
-    <AutocompleteItem key={index} title={item.name} />
-  )
-
-  const onSelect = (index: number) => {
-    setRestaurant(filteredRestaurants[index].name)
-  }
-
-  const onChangeText = (query: string) => {
-    setRestaurant(query)
-    setFilteredRestaurants(
-      filteredRestaurants.filter((item) => filter(item, query))
-    )
-  }
-
-  const inputStyle = { width: "100%", marginBottom: 26 }
 
   return (
     <Container style={{ padding: 20 }}>
       <Controller
         control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Autocomplete
-            label="Restaurant"
-            placeholder="Type here..."
-            value={restaurant}
-            onSelect={onSelect}
-            onChangeText={onChangeText}
-            placement={placement}
-            style={inputStyle}
-          >
-            {filteredRestaurants.map(renderOption)}
-          </Autocomplete>
+        render={({ onChange, value, ref }) => (
+          <>
+            <Text style={styles.label} category="c2" appearance="hint">
+              Restaurant
+            </Text>
+            <Layout style={styles.select}>
+              <Picker selectedValue={value} onValueChange={onChange} ref={ref}>
+                {restaurants.map((restaurant) => (
+                  <Picker.Item
+                    key={restaurant.id}
+                    label={restaurant.name}
+                    value={restaurant.name}
+                  />
+                ))}
+              </Picker>
+            </Layout>
+          </>
         )}
         name="restaurant"
-        rules={{ required: true }}
-        defaultValue=""
+        defaultValue={restaurants[0].name || ""}
       />
-      {errors.restaurant && <Text>This is required.</Text>}
+      {errors.restaurant && (
+        <Text style={{ marginBottom: 10 }} status="danger">
+          Restaurant is required.
+        </Text>
+      )}
+
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
           <Input
             label="Burger"
+            placeholder="Burger name..."
+            style={styles.input}
+            size="large"
             onBlur={onBlur}
             onChangeText={(value) => onChange(value)}
             value={value}
-            style={inputStyle}
           />
         )}
         name="burger"
         defaultValue=""
+        rules={{ required: true }}
       />
+      {errors.burger && (
+        <Text style={{ marginBottom: 10 }} status="danger">
+          Burger name is required.
+        </Text>
+      )}
+
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
           <Input
             label="Review"
+            placeholder="Type review here..."
+            style={styles.input}
+            size="large"
             onBlur={onBlur}
             onChangeText={(value) => onChange(value)}
             value={value}
-            style={inputStyle}
           />
         )}
         name="review"
         defaultValue=""
+        rules={{ required: true }}
       />
+      {errors.review && (
+        <Text style={{ marginBottom: 10 }} status="danger">
+          Review is required.
+        </Text>
+      )}
+
       <Controller
         control={control}
-        render={({ onChange, onBlur, value }) => (
-          <View style={{ width: "100%" }}>
-            <Text appearance="hint">Rating</Text>
-            <RadioGroup
-              selectedIndex={selectedIndex}
-              onChange={(index) => setSelectedIndex(index)}
-              style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                marginBottom: 20,
-              }}
-            >
-              <Radio>1</Radio>
-              <Radio>2</Radio>
-              <Radio>3</Radio>
-              <Radio>4</Radio>
-              <Radio>5</Radio>
-            </RadioGroup>
-          </View>
+        render={({ onChange, value }) => (
+          <>
+            <Text style={styles.label} category="c2" appearance="hint">
+              Rating
+            </Text>
+            <View style={styles.radioGroupLayout}>
+              <RadioGroup
+                selectedIndex={value}
+                onChange={onChange}
+                style={styles.radioGroup}
+              >
+                <Radio>1</Radio>
+                <Radio>2</Radio>
+                <Radio>3</Radio>
+                <Radio>4</Radio>
+                <Radio>5</Radio>
+              </RadioGroup>
+            </View>
+          </>
         )}
         name="rating"
         defaultValue=""
+        rules={{ required: true }}
       />
-      <Button onPress={handleSubmit(onSubmit)}>Submit</Button>
+      {errors.rating && (
+        <Text style={{ marginBottom: 10 }} status="danger">
+          Rating is required.
+        </Text>
+      )}
+
+      <Button
+        style={{ marginTop: 16 }}
+        size="large"
+        onPress={handleSubmit(onSubmit)}
+      >
+        Submit
+      </Button>
     </Container>
   )
 }
+
+const styles = StyleSheet.create({
+  input: {
+    backgroundColor: "#fff",
+  },
+  select: {
+    borderWidth: 1,
+    borderColor: "#ebeff5",
+    borderRadius: 4,
+    marginBottom: 10,
+  },
+  radioGroupLayout: {
+    backgroundColor: "#fff",
+    borderColor: "#ebeff5",
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 10,
+    alignContent: "center",
+    alignItems: "center",
+  },
+  radioGroup: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  label: {
+    marginBottom: 3,
+  },
+})
