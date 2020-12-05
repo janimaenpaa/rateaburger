@@ -26,7 +26,6 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       .then((response) => response.json())
       .then((json) => {
         setRestaurants(json)
-        setLoading(false)
       })
       .catch((error) => console.error(error))
 
@@ -35,7 +34,6 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       .then((response) => response.json())
       .then((json) => {
         setBurgers(json)
-        setLoading(false)
       })
       .catch((error) => console.error(error))
 
@@ -44,14 +42,18 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       .then((response) => response.json())
       .then((json) => {
         setReviews(json)
-        setLoading(false)
       })
       .catch((error) => console.error(error))
 
   useEffect(() => {
-    fetchRestaurants()
-    fetchBurgers()
-    fetchReviews()
+    /* This fetches all the data from different end points 
+    and then sets the Loading state to false */
+    const fetchAll = () =>
+      Promise.all([fetchRestaurants(), fetchBurgers(), fetchReviews()])
+        .then(() => setLoading(false))
+        .catch((error) => console.log(error))
+
+    fetchAll()
   }, [])
 
   return (
