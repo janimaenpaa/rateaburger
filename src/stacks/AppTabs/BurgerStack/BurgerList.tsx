@@ -7,7 +7,7 @@ import { DataContext } from "../../../providers/DataProvider"
 import { averageRating } from "../../../utils"
 
 export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
-  const { burgers } = useContext(DataContext)
+  const { burgers, loading } = useContext(DataContext)
 
   const renderItem = ({ item }: { item: Burger }) => (
     <Card
@@ -36,6 +36,14 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
       <Text>{item.description}</Text>
     </Card>
   )
+
+  if (loading) {
+    return (
+      <Container style={{ alignItems: "center" }}>
+        <Text>Loading...</Text>
+      </Container>
+    )
+  }
 
   return (
     <Container style={styles.container}>

@@ -8,7 +8,7 @@ import { Restaurant, RestaurantNavProps } from "../../../types"
 export const RestaurantList = ({
   navigation,
 }: RestaurantNavProps<"Restaurants">) => {
-  const { restaurants } = useContext(DataContext)
+  const { restaurants, loading } = useContext(DataContext)
   console.log(restaurants)
 
   const renderItem = ({ item }: { item: Restaurant }) => (
@@ -24,18 +24,25 @@ export const RestaurantList = ({
       footer={() => (
         <Layout style={{ margin: 10, marginLeft: 20 }}>
           <Text style={{ color: "#636363" }}>
-            burgers: {item.burgers.length} 
+            burgers: {item.burgers.length}
           </Text>
         </Layout>
       )}
       onPress={() => navigation.navigate("Restaurant", item)}
     >
-      <Text >
-        {item.name}
-      </Text>
+      <Text>{item.name}</Text>
       <Text>{item.description}</Text>
     </Card>
   )
+
+  if (loading) {
+    return (
+      <Container style={{ alignItems: "center" }}>
+        <Text>Loading...</Text>
+      </Container>
+    )
+  }
+
   return (
     <Container>
       <List data={restaurants} renderItem={renderItem} />

@@ -10,7 +10,7 @@ interface HomeProps {}
 
 export const Home: React.FC<HomeProps> = () => {
   const { logout } = useContext(AuthContext)
-  const { reviews } = useContext(DataContext)
+  const { reviews, loading } = useContext(DataContext)
 
   const renderItem = ({ item }: { item: Review }) => (
     <Card style={{ margin: 6 }} key={item.id}>
@@ -24,6 +24,14 @@ export const Home: React.FC<HomeProps> = () => {
       <Stars value={item.stars} />
     </Card>
   )
+
+  if (loading) {
+    return (
+      <Container style={{ alignItems: "center" }}>
+        <Text>Loading...</Text>
+      </Container>
+    )
+  }
 
   return (
     <Container>

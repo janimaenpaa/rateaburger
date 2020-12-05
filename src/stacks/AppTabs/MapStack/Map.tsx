@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Container } from "../../../components/Container"
-import { StyleSheet, Alert } from "react-native"
+import { StyleSheet, Alert, Text } from "react-native"
 import MapView, { Marker } from "react-native-maps"
 import * as Location from "expo-location"
 import { DataContext } from "../../../providers/DataProvider"
@@ -8,7 +8,7 @@ import { DataContext } from "../../../providers/DataProvider"
 interface MapProps {}
 
 export const Map: React.FC<MapProps> = () => {
-  const { restaurants } = useContext(DataContext)
+  const { restaurants, loading } = useContext(DataContext)
   const [region, setRegion] = useState({
     latitude: 60.169877007627676,
     longitude: 24.938366007081427,
@@ -50,6 +50,14 @@ export const Map: React.FC<MapProps> = () => {
       title={restaurant.name}
     />
   ))
+
+  if (loading) {
+    return (
+      <Container style={{ alignItems: "center" }}>
+        <Text>Loading...</Text>
+      </Container>
+    )
+  }
 
   return (
     <Container>
