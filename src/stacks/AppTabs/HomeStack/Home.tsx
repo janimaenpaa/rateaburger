@@ -5,6 +5,8 @@ import { Card, List, Text } from "@ui-kitten/components"
 import { DataContext } from "../../../providers/DataProvider"
 import { Review } from "../../../types"
 import { Stars } from "../../../components/Stars"
+import { Carousel } from "./Carousel"
+import { StyleSheet } from "react-native"
 
 interface HomeProps {}
 
@@ -35,8 +37,22 @@ export const Home: React.FC<HomeProps> = () => {
 
   return (
     <Container>
-      <Text category="h2">Feed</Text>
+      <Text category="h4" style={styles.text}>
+        Latest burgers
+      </Text>
+      <Carousel />
+      <Text category="h4" style={styles.text}>
+        Feed
+      </Text>
       <List style={{ width: "100%" }} data={reviews} renderItem={renderItem} />
     </Container>
   )
 }
+
+const styles = StyleSheet.create({
+  text: {
+    fontWeight: "bold",
+    marginTop: 10,
+    marginLeft: 10,
+  },
+})
