@@ -17,7 +17,7 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
       header={() => (
         <Image
           resizeMode="cover"
-          style={{ width: "100%", height: 180 }}
+          style={styles.image}
           source={{ uri: item.imgUrl }}
         />
       )}
@@ -51,29 +51,32 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
 
   return (
     <Container style={styles.container}>
-      <List
-        ref={ref}
-        ListHeaderComponent={
-          <Layout style={styles.buttonView}>
-            <Button
-              style={styles.rateButton}
-              onPress={() => navigation.navigate("RateBurger")}
-            >
-              RATE BURGER
-            </Button>
-            <Button
-              status="info"
-              style={styles.addButton}
-              onPress={() => navigation.navigate("AddBurger")}
-            >
-              ADD BURGER
-            </Button>
-          </Layout>
-        }
-        style={styles.list}
-        data={burgers}
-        renderItem={renderItem}
-      />
+      <Layout style={styles.layout}>
+        <List
+          ref={ref}
+          ListHeaderComponent={
+            <Layout style={styles.buttonView}>
+              <Button
+                style={styles.button}
+                onPress={() => navigation.navigate("RateBurger")}
+              >
+                RATE BURGER
+              </Button>
+              <Button
+                status="info"
+                style={styles.button}
+                onPress={() => navigation.navigate("AddBurger")}
+              >
+                ADD BURGER
+              </Button>
+            </Layout>
+          }
+          style={styles.list}
+          data={burgers}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+        />
+      </Layout>
     </Container>
   )
 }
@@ -85,15 +88,9 @@ const styles = StyleSheet.create({
   buttonView: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginLeft: 14,
-    marginRight: 14,
-    marginTop: 20,
   },
-  rateButton: {
-    width: "46%",
-  },
-  addButton: {
-    width: "46%",
+  button: {
+    width: "44%",
   },
   list: {
     width: "100%",
@@ -104,7 +101,12 @@ const styles = StyleSheet.create({
   },
   card: {
     margin: 10,
-    marginLeft: 20,
-    marginRight: 20,
+  },
+  layout: {
+    margin: 10,
+  },
+  image: {
+    width: "100%",
+    height: 180,
   },
 })

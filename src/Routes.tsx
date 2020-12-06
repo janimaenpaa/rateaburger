@@ -6,12 +6,21 @@ import { Container } from "./components/Container"
 import { AuthContext } from "./providers/AuthProvider"
 import { AppTabs } from "./stacks/AppTabs"
 import { AuthStack } from "./stacks/AuthStack"
+import { Layout } from "@ui-kitten/components"
+import { SplashScreen } from "./components/SplashScreen"
 
 interface RoutesProps {}
 
 export const Routes: React.FC<RoutesProps> = ({}) => {
   const { user, setUserFromStorage, setUser } = useContext(AuthContext)
   const [loading, setLoading] = useState(true)
+  const [splashScreen, setSplashScreen] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSplashScreen(false)
+    }, 3000)
+  })
 
   useEffect(() => {
     AsyncStorage.getItem("user")
@@ -26,6 +35,8 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
       })
       .catch((error) => console.log(error))
   }, [])
+
+  if (splashScreen) return <SplashScreen />
 
   if (loading) {
     return (
