@@ -13,12 +13,44 @@ import {
 import { DataContext } from "../../../providers/DataProvider"
 import { View, StyleSheet } from "react-native"
 import { Picker } from "@react-native-picker/picker"
+import { AuthContext } from "../../../providers/AuthProvider"
+import AsyncStorage from "@react-native-community/async-storage"
 
 export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
-  const { restaurants } = useContext(DataContext)
-  const [selectedIndex, setSelectedIndex] = useState(4)
+  const {
+    restaurants,
+    burgers,
+    reviews,
+    setBurgers,
+    setReviews,
+    refetch,
+  } = useContext(DataContext)
+  const { user } = useContext(AuthContext)
   const { control, handleSubmit, errors } = useForm()
-  const onSubmit = (data: any) => console.log(data)
+
+  const onSubmit = async (data: any) => {
+    if (user) {
+      const review = { ...data, stars: data.stars + 1, user: user.id }
+      console.log(review)
+
+      fetch("https://rateaburger.herokuapp.com/api/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(review),
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json)
+          refetch()
+        })
+        .then(() => navigation.goBack())
+        .catch((error) => console.log(error))
+    } else {
+      console.log("error")
+    }
+  }
 
   return (
     <Container style={{ padding: 20 }}>
@@ -27,45 +59,23 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
         render={({ onChange, value, ref }) => (
           <>
             <Text style={styles.label} category="c2" appearance="hint">
-              Restaurant
+              Burger
             </Text>
             <Layout style={styles.select}>
               <Picker selectedValue={value} onValueChange={onChange} ref={ref}>
-                {restaurants.map((restaurant) => (
+                {burgers.map((burger) => (
                   <Picker.Item
-                    key={restaurant.id}
-                    label={restaurant.name}
-                    value={restaurant.name}
+                    key={burger.id}
+                    label={burger.name}
+                    value={burger.id}
                   />
                 ))}
               </Picker>
             </Layout>
           </>
         )}
-        name="restaurant"
-        defaultValue={restaurants[0].name || ""}
-      />
-      {errors.restaurant && (
-        <Text style={{ marginBottom: 10 }} status="danger">
-          Restaurant is required.
-        </Text>
-      )}
-
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            label="Burger"
-            placeholder="Burger name..."
-            style={styles.input}
-            size="large"
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            value={value}
-          />
-        )}
         name="burger"
-        defaultValue=""
+        defaultValue={burgers[0].name}
         rules={{ required: true }}
       />
       {errors.burger && (
@@ -87,7 +97,7 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
             value={value}
           />
         )}
-        name="review"
+        name="description"
         defaultValue=""
         rules={{ required: true }}
       />
@@ -119,8 +129,8 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
             </View>
           </>
         )}
-        name="rating"
-        defaultValue=""
+        name="stars"
+        defaultValue={0}
         rules={{ required: true }}
       />
       {errors.rating && (

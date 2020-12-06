@@ -9,6 +9,7 @@ export const DataContext = React.createContext<{
   setRestaurants: React.Dispatch<React.SetStateAction<Restaurant[]>>
   setBurgers: React.Dispatch<React.SetStateAction<Burger[]>>
   setReviews: React.Dispatch<React.SetStateAction<Review[]>>
+  refetch: () => void
 }>({
   restaurants: [],
   burgers: [],
@@ -17,6 +18,7 @@ export const DataContext = React.createContext<{
   setRestaurants: () => {},
   setBurgers: () => {},
   setReviews: () => {},
+  refetch: () => {},
 })
 
 interface DataProviderProps {}
@@ -62,6 +64,13 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     fetchAll()
   }, [])
 
+  const refetch = () => {
+    fetchBurgers()
+      .then(fetchRestaurants)
+      .then(fetchRestaurants)
+      .catch((error) => console.log(error))
+  }
+
   return (
     <DataContext.Provider
       value={{
@@ -72,6 +81,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         setRestaurants,
         setBurgers,
         setReviews,
+        refetch,
       }}
     >
       {children}
