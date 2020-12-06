@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Container } from "../../../components/Container"
-import { StyleSheet, Alert, Text } from "react-native"
-import MapView, { Marker } from "react-native-maps"
+import { StyleSheet, Alert } from "react-native"
+import MapView, { Callout, Marker } from "react-native-maps"
 import * as Location from "expo-location"
 import { DataContext } from "../../../providers/DataProvider"
+import { Layout, Text } from "@ui-kitten/components"
+import { Restaurant } from "../../../types"
+import { Stars } from "../../../components/Stars"
+import { averageRating, restaurantRating } from "../../../utils"
 
 interface MapProps {}
 
@@ -38,17 +42,26 @@ export const Map: React.FC<MapProps> = () => {
 
   useEffect(() => {
     getPhoneLocation()
+    console.log(restaurants)
   }, [])
 
-  const markers = restaurants.map((restaurant) => (
+  const markers = restaurants.map((restaurant: Restaurant) => (
     <Marker
-      key={restaurant.id}
+      key={`${restaurant.id}${Date.now()}`}
       coordinate={{
         latitude: Number(restaurant.coordinates.latitude),
         longitude: Number(restaurant.coordinates.longitude),
       }}
       title={restaurant.name}
-    />
+    >
+      <Callout>
+        <Layout style={{ backgroundColor: "#fff", padding: 10 }}>
+          <Text style={{ fontWeight: "bold" }}>{restaurant.name}</Text>
+          <Text>{restaurant.burgers.length} burgers</Text>
+          <Stars value={restaurantRating(restaurant)} />
+        </Layout>
+      </Callout>
+    </Marker>
   ))
 
   if (loading) {
