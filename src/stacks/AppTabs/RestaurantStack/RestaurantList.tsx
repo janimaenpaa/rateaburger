@@ -45,13 +45,18 @@ export const RestaurantList = ({
 
   return (
     <Container>
-      <Button
-        style={{ margin: 10, marginTop: 20 }}
-        onPress={() => navigation.navigate("AddRestaurant")}
-      >
-        ADD RESTAURANT
-      </Button>
-      <List data={restaurants} renderItem={renderItem} />
+      <List
+        ListHeaderComponent={
+          <Button
+            style={{ margin: 10, marginTop: 20 }}
+            onPress={() => navigation.navigate("AddRestaurant")}
+          >
+            ADD RESTAURANT
+          </Button>
+        }
+        data={restaurants}
+        renderItem={renderItem}
+      />
     </Container>
   )
 }

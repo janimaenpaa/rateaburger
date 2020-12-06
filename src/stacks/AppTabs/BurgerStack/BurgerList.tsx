@@ -47,22 +47,28 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
 
   return (
     <Container style={styles.container}>
-      <Layout style={styles.buttonView}>
-        <Button
-          style={styles.rateButton}
-          onPress={() => navigation.navigate("RateBurger")}
-        >
-          Rate burger
-        </Button>
-        <Button
-          status="info"
-          style={styles.addButton}
-          onPress={() => navigation.navigate("AddBurger")}
-        >
-          Add burger
-        </Button>
-      </Layout>
-      <List style={styles.list} data={burgers} renderItem={renderItem} />
+      <List
+        ListHeaderComponent={
+          <Layout style={styles.buttonView}>
+            <Button
+              style={styles.rateButton}
+              onPress={() => navigation.navigate("RateBurger")}
+            >
+              Rate burger
+            </Button>
+            <Button
+              status="info"
+              style={styles.addButton}
+              onPress={() => navigation.navigate("AddBurger")}
+            >
+              Add burger
+            </Button>
+          </Layout>
+        }
+        style={styles.list}
+        data={burgers}
+        renderItem={renderItem}
+      />
     </Container>
   )
 }

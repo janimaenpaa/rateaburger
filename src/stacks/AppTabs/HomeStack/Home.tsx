@@ -37,14 +37,22 @@ export const Home: React.FC<HomeProps> = () => {
 
   return (
     <Container>
-      <Text category="h4" style={styles.text}>
-        Latest burgers
-      </Text>
-      <Carousel />
-      <Text category="h4" style={styles.text}>
-        Feed
-      </Text>
-      <List style={{ width: "100%" }} data={reviews} renderItem={renderItem} />
+      <List
+        ListHeaderComponent={
+          <>
+            <Text category="h4" style={styles.text}>
+              Latest burgers
+            </Text>
+            <Carousel />
+            <Text category="h4" style={styles.text}>
+              Feed
+            </Text>
+          </>
+        }
+        style={{ width: "100%" }}
+        data={reviews}
+        renderItem={renderItem}
+      />
     </Container>
   )
 }
