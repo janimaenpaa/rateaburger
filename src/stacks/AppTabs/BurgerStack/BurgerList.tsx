@@ -12,7 +12,7 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
 
   const renderItem = ({ item }: { item: Burger }) => (
     <Card
-      style={{ flex: 1, margin: 10 }}
+      style={styles.card}
       onPress={() => navigation.navigate("Burger", item)}
       header={() => (
         <Image
@@ -59,14 +59,14 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
               style={styles.rateButton}
               onPress={() => navigation.navigate("RateBurger")}
             >
-              Rate burger
+              RATE BURGER
             </Button>
             <Button
               status="info"
               style={styles.addButton}
               onPress={() => navigation.navigate("AddBurger")}
             >
-              Add burger
+              ADD BURGER
             </Button>
           </Layout>
         }
@@ -84,15 +84,16 @@ const styles = StyleSheet.create({
   },
   buttonView: {
     flexDirection: "row",
-    marginTop: 10,
+    justifyContent: "space-around",
+    marginLeft: 14,
+    marginRight: 14,
+    marginTop: 20,
   },
   rateButton: {
     width: "46%",
-    margin: 5,
   },
   addButton: {
     width: "46%",
-    margin: 5,
   },
   list: {
     width: "100%",
@@ -100,5 +101,10 @@ const styles = StyleSheet.create({
   rating: {
     marginLeft: 20,
     padding: 4,
+  },
+  card: {
+    margin: 10,
+    marginLeft: 20,
+    marginRight: 20,
   },
 })
