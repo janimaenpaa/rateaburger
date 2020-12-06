@@ -22,7 +22,7 @@ export const RestaurantPage = ({ route }: RestaurantNavProps<"Restaurant">) => {
   const renderItem = ({ item }: { item: Burger }) => {
     return (
       <Card
-        style={{ marginBottom: 20 }}
+        style={{ marginBottom: 10, marginLeft: 20, marginRight: 20 }}
         header={() => (
           <Image
             resizeMode="cover"
@@ -38,27 +38,32 @@ export const RestaurantPage = ({ route }: RestaurantNavProps<"Restaurant">) => {
 
   return (
     <Container style={{ justifyContent: "flex-start" }}>
-      <ScrollView>
-        <ImageBackground
-          resizeMode="cover"
-          style={{ width: "100%", height: 260 }}
-          source={Img}
-        >
-          <Text style={{ color: "white" }} category="h2">
-            5.0
-          </Text>
-        </ImageBackground>
+      <List
+        ListHeaderComponent={
+          <>
+            <ImageBackground
+              resizeMode="cover"
+              style={{ width: "100%", height: 260 }}
+              source={Img}
+            >
+              <Text style={{ color: "white" }} category="h2">
+                5.0
+              </Text>
+            </ImageBackground>
 
-        <Layout style={{ margin: 20, backgroundColor: "#F7F9FC", flex: 1 }}>
-          <Text category="h2">{name}</Text>
-          <Text style={{ marginLeft: 4, marginBottom: 10 }}>{address}</Text>
-          <Text style={{ marginLeft: 4, marginBottom: 10 }}>{description}</Text>
-          <Text style={{ marginBottom: 10 }} category="h4">
-            Burgers
-          </Text>
-          <List data={burgers} renderItem={renderItem} />
-        </Layout>
-      </ScrollView>
+            <Layout style={{ margin: 20, backgroundColor: "#F7F9FC", flex: 1 }}>
+              <Text category="h2">{name}</Text>
+              <Text style={{ marginLeft: 4, marginBottom: 10 }}>{address}</Text>
+              <Text style={{ marginLeft: 4, marginBottom: 10 }}>
+                {description}
+              </Text>
+              <Text category="h4">Burgers</Text>
+            </Layout>
+          </>
+        }
+        data={burgers}
+        renderItem={renderItem}
+      />
     </Container>
   )
 }

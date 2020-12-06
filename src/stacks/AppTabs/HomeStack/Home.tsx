@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useRef } from "react"
 import { AuthContext } from "../../../providers/AuthProvider"
 import { Container } from "../../../components/Container"
 import { Card, List, Text } from "@ui-kitten/components"
@@ -7,6 +7,7 @@ import { Review } from "../../../types"
 import { Stars } from "../../../components/Stars"
 import { Carousel } from "./Carousel"
 import { StyleSheet } from "react-native"
+import { useScrollToTop } from "@react-navigation/native"
 
 interface HomeProps {}
 

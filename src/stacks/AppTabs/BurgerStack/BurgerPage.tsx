@@ -13,7 +13,7 @@ export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
 
   const renderItem = ({ item }: { item: Review }) => {
     return (
-      <Card style={{ marginBottom: 20 }}>
+      <Card style={{ margin: 8, marginLeft: 20, marginRight: 20 }}>
         <Text style={{ fontWeight: "bold" }}>
           {item.user.firstName} {item.user.lastName}
         </Text>
@@ -22,27 +22,36 @@ export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
       </Card>
     )
   }
+
+  const HeaderComponent = () => (
+    <>
+      <Image
+        resizeMode="cover"
+        style={{ width: "100%", height: 260 }}
+        source={Img}
+      />
+      <Layout
+        style={{
+          margin: 10,
+          backgroundColor: "#F7F9FC",
+          flex: 1,
+        }}
+      >
+        <Text category="h2">{name}</Text>
+        <Text style={{ marginLeft: 4, marginBottom: 10 }}>{description}</Text>
+        <Text category="h4">Reviews</Text>
+        {reviews.length === 0 && <Text>No review yet...</Text>}
+      </Layout>
+    </>
+  )
+
   return (
     <Container style={{ justifyContent: "flex-start" }}>
-      <ScrollView>
-        <Image
-          resizeMode="cover"
-          style={{ width: "100%", height: 260 }}
-          source={Img}
-        />
-        <Layout style={{ margin: 20, backgroundColor: "#F7F9FC", flex: 1 }}>
-          <Text category="h2">{name}</Text>
-          <Text style={{ marginLeft: 4, marginBottom: 10 }}>{description}</Text>
-          <Text style={{ marginBottom: 10 }} category="h4">
-            Reviews
-          </Text>
-          {reviews.length > 0 ? (
-            <List data={reviews} renderItem={renderItem} />
-          ) : (
-            <Text>No review yet...</Text>
-          )}
-        </Layout>
-      </ScrollView>
+      <List
+        ListHeaderComponent={HeaderComponent}
+        data={reviews}
+        renderItem={renderItem}
+      />
     </Container>
   )
 }

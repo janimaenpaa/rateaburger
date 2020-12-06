@@ -1,9 +1,10 @@
-import React, { useContext } from "react"
+import React, { useContext, useRef } from "react"
 import { Container } from "../../../components/Container"
 import { Image } from "react-native"
 import { DataContext } from "../../../providers/DataProvider"
 import { Button, Card, Layout, List, Text } from "@ui-kitten/components"
 import { Restaurant, RestaurantNavProps } from "../../../types"
+import { useScrollToTop } from "@react-navigation/native"
 
 export const RestaurantList = ({
   navigation,
@@ -43,9 +44,13 @@ export const RestaurantList = ({
     )
   }
 
+  const ref = useRef(null)
+  useScrollToTop(ref)
+
   return (
     <Container>
       <List
+        ref={ref}
         ListHeaderComponent={
           <Button
             style={{ margin: 10, marginTop: 20 }}

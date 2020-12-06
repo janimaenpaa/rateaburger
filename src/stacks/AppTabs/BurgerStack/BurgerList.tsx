@@ -1,10 +1,11 @@
-import React, { useContext } from "react"
+import React, { useContext, useRef } from "react"
 import { Image, StyleSheet } from "react-native"
 import { Button, Card, Text, List, Layout } from "@ui-kitten/components"
 import { Container } from "../../../components/Container"
 import { Burger, BurgerNavProps } from "../../../types"
 import { DataContext } from "../../../providers/DataProvider"
 import { averageRating } from "../../../utils"
+import { useScrollToTop } from "@react-navigation/native"
 
 export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
   const { burgers, loading } = useContext(DataContext)
@@ -45,9 +46,13 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
     )
   }
 
+  const ref = useRef(null)
+  useScrollToTop(ref)
+
   return (
     <Container style={styles.container}>
       <List
+        ref={ref}
         ListHeaderComponent={
           <Layout style={styles.buttonView}>
             <Button
