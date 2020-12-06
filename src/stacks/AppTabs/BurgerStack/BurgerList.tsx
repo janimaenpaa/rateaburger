@@ -1,29 +1,55 @@
 import React, { useContext, useRef } from "react"
-import { Image, StyleSheet } from "react-native"
-import { Button, Card, Text, List, Layout } from "@ui-kitten/components"
+import { Image, ImageBackground, StyleSheet } from "react-native"
+import {
+  Button,
+  Card,
+  Text,
+  List,
+  Layout,
+  ListItem,
+} from "@ui-kitten/components"
 import { Container } from "../../../components/Container"
 import { Burger, BurgerNavProps } from "../../../types"
 import { DataContext } from "../../../providers/DataProvider"
-import { averageRating } from "../../../utils"
+import { burgerRating } from "../../../utils"
 import { useScrollToTop } from "@react-navigation/native"
 
 export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
   const { burgers, loading } = useContext(DataContext)
 
-  const renderItem = ({ item }: { item: Burger }) => (
+  const rankedBurgers = [...burgers].sort((a, b) =>
+    burgerRating(a.reviews) > burgerRating(b.reviews) ? -1 : 1
+  )
+
+  const renderItem = ({ item, index }: { item: Burger; index: number }) => (
     <Card
       style={styles.card}
       onPress={() => navigation.navigate("Burger", item)}
       header={() => (
-        <Image
+        <ImageBackground
           resizeMode="cover"
           style={styles.image}
           source={{ uri: item.imgUrl }}
-        />
+        >
+          <ListItem
+            style={{
+              width: 50,
+              borderRadius: 10,
+              justifyContent: "center",
+              backgroundColor: "#FFC529",
+              margin: 14,
+            }}
+          >
+            <Text
+              category="h6"
+              style={{ fontWeight: "700", color: "#fff" }}
+            >{`#${index + 1}`}</Text>
+          </ListItem>
+        </ImageBackground>
       )}
       footer={() => (
         <Text style={styles.rating} category="s1" appearance="hint">
-          rating {averageRating(item.reviews)} / 5.0 | {item.reviews.length}{" "}
+          rating {burgerRating(item.reviews)} / 5.0 | {item.reviews.length}{" "}
           reviews
         </Text>
       )}
@@ -72,7 +98,7 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
             </Layout>
           }
           style={styles.list}
-          data={burgers}
+          data={rankedBurgers}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
         />

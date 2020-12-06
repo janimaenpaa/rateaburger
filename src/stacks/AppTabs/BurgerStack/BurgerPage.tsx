@@ -1,19 +1,20 @@
 import React from "react"
 import { Card, Layout, List, Text } from "@ui-kitten/components"
 import { Image, ImageBackground } from "react-native"
-import { ScrollView } from "react-native-gesture-handler"
 import { Container } from "../../../components/Container"
 import { BurgerNavProps, Review } from "../../../types"
 import { Stars } from "../../../components/Stars"
+import { format } from "date-fns"
 
 export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
-  const { imgUrl, name, description, reviews, patty } = route.params
+  const { imgUrl, name, description, reviews, patty, date } = route.params
 
   const Img = imgUrl ? { uri: imgUrl } : require("../../../restaurantImg.jpg")
 
   const renderItem = ({ item }: { item: Review }) => {
     return (
       <Card style={{ margin: 8, marginLeft: 20, marginRight: 20 }}>
+        <Text appearance="hint">{format(new Date(date), "dd/MM/yyyy")}</Text>
         <Text style={{ fontWeight: "bold" }}>
           {item.user.firstName} {item.user.lastName}
         </Text>

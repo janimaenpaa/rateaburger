@@ -7,8 +7,7 @@ import { DataContext } from "../../../providers/DataProvider"
 import { Layout, Text } from "@ui-kitten/components"
 import { MapNavProps, Restaurant } from "../../../types"
 import { Stars } from "../../../components/Stars"
-import { averageRating, restaurantRating } from "../../../utils"
-import { TouchableWithoutFeedback as TouchableHighlight } from "react-native-gesture-handler"
+import { restaurantRating } from "../../../utils"
 
 export const Map = ({ navigation }: MapNavProps<"Map">) => {
   const { restaurants, loading } = useContext(DataContext)

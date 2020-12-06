@@ -1,9 +1,9 @@
 import { Restaurant, Review } from "./types"
 
-export const averageRating = (reviews: Review[]) => {
+export const burgerRating = (reviews: Review[]) => {
   if (reviews.length === 0) return 0
 
-  return (
+  return Number(
     reviews.reduce((a, { stars }) => a + stars, 0) / reviews.length
   ).toFixed(1)
 }
@@ -12,7 +12,7 @@ export const restaurantRating = (restaurant: Restaurant) => {
   let averages: number[] = []
 
   restaurant.burgers.map((burger) =>
-    averages.push(Number(averageRating(burger.reviews)))
+    averages.push(Number(burgerRating(burger.reviews)))
   )
 
   if (averages.length === 0) return 0

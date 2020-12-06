@@ -54,7 +54,7 @@ export const RestaurantList = ({
           ref={ref}
           ListHeaderComponent={
             <Button
-              style={{ margin: 10, marginTop: 20 }}
+              style={{ marginLeft: 10, marginRight: 10, marginTop: 5 }}
               onPress={() => navigation.navigate("AddRestaurant")}
             >
               ADD RESTAURANT

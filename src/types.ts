@@ -102,7 +102,7 @@ export type Review = {
   id: string
   description: string
   stars: number
-  time: Date
+  date: Date
   user: User
   burger: Burger
 }

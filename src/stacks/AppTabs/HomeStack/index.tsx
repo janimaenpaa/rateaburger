@@ -2,6 +2,7 @@ import React from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import { Home } from "./Home"
 import { LogoutButton } from "../../../components/LogoutButton"
+import { BurgerPage } from "../BurgerStack/BurgerPage"
 
 interface HomeStackProps {}
 
@@ -26,6 +27,7 @@ export const HomeStack: React.FC<HomeStackProps> = () => {
         component={Home}
         options={{ title: "RateABurger" }}
       />
+      <Stack.Screen name="Burger" component={BurgerPage} />
     </Stack.Navigator>
   )
 }
