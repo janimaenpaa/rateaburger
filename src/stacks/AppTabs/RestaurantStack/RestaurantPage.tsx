@@ -14,7 +14,10 @@ import { ScrollView } from "react-native-gesture-handler"
     burgers.map((burger) => <BurgerCard key={burger.id} burger={burger} />)
   ) */
 
-export const RestaurantPage = ({ route }: RestaurantNavProps<"Restaurant">) => {
+export const RestaurantPage = ({
+  route,
+  navigation,
+}: RestaurantNavProps<"Restaurant">) => {
   const { imgUrl, name, address, description, burgers } = route.params
 
   const Img = imgUrl ? { uri: imgUrl } : require("../../../restaurantImg.jpg")
@@ -22,6 +25,7 @@ export const RestaurantPage = ({ route }: RestaurantNavProps<"Restaurant">) => {
   const renderItem = ({ item }: { item: Burger }) => {
     return (
       <Card
+        onPress={() => navigation.navigate("Burger", item)}
         style={{ marginBottom: 10, marginLeft: 20, marginRight: 20 }}
         header={() => (
           <Image

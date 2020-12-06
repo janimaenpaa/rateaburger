@@ -27,6 +27,7 @@ export type RestaurantParamList = {
   Restaurants: undefined
   Restaurant: Restaurant
   AddRestaurant: undefined
+  Burger: Burger
 }
 
 export type RestaurantNavProps<T extends keyof RestaurantParamList> = {

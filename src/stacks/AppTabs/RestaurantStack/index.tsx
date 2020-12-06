@@ -4,6 +4,7 @@ import { RestaurantList } from "./RestaurantList"
 import { RestaurantPage } from "./RestaurantPage"
 import { LogoutButton } from "../../../components/LogoutButton"
 import { AddRestaurant } from "./AddRestaurant"
+import { BurgerPage } from "../BurgerStack/BurgerPage"
 
 interface RestaurantStackProps {}
 
@@ -33,6 +34,10 @@ export const RestaurantStack: React.FC<RestaurantStackProps> = () => {
         name="AddRestaurant"
         component={AddRestaurant}
         options={{ title: "Add Restaurant" }}
+      />
+      <Stack.Screen
+        name="Burger"
+        component={BurgerPage}
       />
     </Stack.Navigator>
   )
