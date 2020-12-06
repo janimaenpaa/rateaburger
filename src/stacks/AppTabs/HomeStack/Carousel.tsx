@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Layout, List, Text } from "@ui-kitten/components"
+import { Layout, List } from "@ui-kitten/components"
 import { DataContext } from "../../../providers/DataProvider"
 import { Burger } from "../../../types"
 import { ImageBackground } from "react-native"
@@ -11,7 +11,7 @@ export const Carousel: React.FC<CarouselProps> = () => {
   const { burgers } = useContext(DataContext)
 
   useEffect(() => {
-    const sortBurgersByDate = burgers.sort(
+    const sortBurgersByDate = [...burgers].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     )
 

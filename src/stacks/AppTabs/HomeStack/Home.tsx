@@ -1,5 +1,4 @@
-import React, { useContext, useRef } from "react"
-import { AuthContext } from "../../../providers/AuthProvider"
+import React, { useContext } from "react"
 import { Container } from "../../../components/Container"
 import { Card, List, Text } from "@ui-kitten/components"
 import { DataContext } from "../../../providers/DataProvider"
@@ -7,22 +6,25 @@ import { Review } from "../../../types"
 import { Stars } from "../../../components/Stars"
 import { Carousel } from "./Carousel"
 import { StyleSheet } from "react-native"
-import { useScrollToTop } from "@react-navigation/native"
 
 interface HomeProps {}
 
 export const Home: React.FC<HomeProps> = () => {
-  const { logout } = useContext(AuthContext)
   const { reviews, loading } = useContext(DataContext)
 
   const renderItem = ({ item }: { item: Review }) => (
-    <Card style={{ margin: 6 }} key={item.id}>
-      <Text category="p1">user rated a burger</Text>
-      <Text style={{ fontWeight: "700" }} category="p1">
+    <Card style={styles.card} key={item.id}>
+      <Text category="p1">
+        <Text
+          style={{ fontWeight: "bold" }}
+        >{`${item.user.firstName} ${item.user.lastName}`}</Text>{" "}
+        rated a burger
+      </Text>
+      <Text style={{ fontWeight: "700", marginBottom: 5 }} category="p1">
         {item.burger.name}
       </Text>
-      <Text style={{ fontWeight: "700", marginTop: 8 }} category="p1">
-        Rating
+      <Text appearance="hint" style={{ marginBottom: 4 }}>
+        {item.description}
       </Text>
       <Stars value={item.stars} />
     </Card>
@@ -46,7 +48,7 @@ export const Home: React.FC<HomeProps> = () => {
             </Text>
             <Carousel />
             <Text category="h4" style={styles.text}>
-              Feed
+              Latest reviews
             </Text>
           </>
         }
@@ -63,5 +65,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     marginLeft: 10,
+  },
+  card: {
+    margin: 6,
+    marginLeft: 10,
+    marginRight: 10,
   },
 })
