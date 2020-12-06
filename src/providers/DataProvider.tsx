@@ -6,11 +6,13 @@ export const DataContext = React.createContext<{
   burgers: Burger[]
   reviews: Review[]
   loading: boolean
+  setRestaurants: React.Dispatch<React.SetStateAction<Restaurant[]>>
 }>({
   restaurants: [],
   burgers: [],
   reviews: [],
   loading: true,
+  setRestaurants: () => {},
 })
 
 interface DataProviderProps {}
@@ -63,6 +65,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         burgers,
         reviews,
         loading,
+        setRestaurants,
       }}
     >
       {children}

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { Alert, StyleSheet, Image } from "react-native"
 import { Text, Input, Button, Layout } from "@ui-kitten/components"
 import { Container } from "../../../components/Container"
 import { RestaurantNavProps } from "../../../types"
 import * as ImagePicker from "expo-image-picker"
+import { DataContext } from "../../../providers/DataProvider"
 
 declare global {
   interface FormDataValue {
@@ -22,11 +23,18 @@ declare global {
 export const AddRestaurant = ({
   navigation,
 }: RestaurantNavProps<"AddRestaurant">) => {
+  const { restaurants, setRestaurants } = useContext(DataContext)
   const [image, setImage] = useState<any>(null)
   const [uploadedImgUrl, setUploadedImgUrl] = useState<string | null>("")
   const { control, handleSubmit, errors } = useForm()
+
+  const noImg =
+    "https://rateaburger.s3.eu-north-1.amazonaws.com/7164666a-a1f0-494a-a9c0-bb669f2d0195"
+
   const onSubmit = (data: any) => {
-    const restaurant = { ...data, imgUrl: uploadedImgUrl }
+    const imgUrl = uploadedImgUrl?.length === 0 ? noImg : uploadedImgUrl
+
+    const restaurant = { ...data, imgUrl: imgUrl }
     console.log(restaurant)
 
     fetch("https://rateaburger.herokuapp.com/api/restaurants", {
@@ -39,13 +47,11 @@ export const AddRestaurant = ({
       .then((response) => response.json())
       .then((json) => {
         console.log({ response: json })
-        navigation.goBack()
+        setRestaurants([...restaurants, {...json, burgers: []}])
       })
+      .then(() => navigation.goBack())
       .catch((error) => console.log(error))
   }
-
-  const noImg =
-    "https://rateaburger.s3.eu-north-1.amazonaws.com/7164666a-a1f0-494a-a9c0-bb669f2d0195"
 
   useEffect(() => {
     ;async () => {
