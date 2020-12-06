@@ -2,6 +2,7 @@ import React from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import { Map } from "./Map"
 import { LogoutButton } from "../../../components/LogoutButton"
+import { RestaurantPage } from "../RestaurantStack/RestaurantPage"
 
 interface MapStackProps {}
 
@@ -22,6 +23,7 @@ export const MapStack: React.FC<MapStackProps> = () => {
       }}
     >
       <Stack.Screen name="Map" component={Map} />
+      <Stack.Screen name="Restaurant" component={RestaurantPage} />
     </Stack.Navigator>
   )
 }

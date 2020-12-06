@@ -5,13 +5,12 @@ import MapView, { Callout, Marker } from "react-native-maps"
 import * as Location from "expo-location"
 import { DataContext } from "../../../providers/DataProvider"
 import { Layout, Text } from "@ui-kitten/components"
-import { Restaurant } from "../../../types"
+import { MapNavProps, Restaurant } from "../../../types"
 import { Stars } from "../../../components/Stars"
 import { averageRating, restaurantRating } from "../../../utils"
+import { TouchableWithoutFeedback as TouchableHighlight } from "react-native-gesture-handler"
 
-interface MapProps {}
-
-export const Map: React.FC<MapProps> = () => {
+export const Map = ({ navigation }: MapNavProps<"Map">) => {
   const { restaurants, loading } = useContext(DataContext)
   const [region, setRegion] = useState({
     latitude: 60.169877007627676,
@@ -54,7 +53,7 @@ export const Map: React.FC<MapProps> = () => {
       }}
       title={restaurant.name}
     >
-      <Callout>
+      <Callout onPress={() => navigation.navigate("Restaurant", restaurant)}>
         <Layout style={{ backgroundColor: "#fff", padding: 10 }}>
           <Text style={{ fontWeight: "bold" }}>{restaurant.name}</Text>
           <Text>{restaurant.burgers.length} burgers</Text>

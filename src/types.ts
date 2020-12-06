@@ -23,6 +23,16 @@ export type BurgerNavProps<T extends keyof BurgerParamList> = {
   route: RouteProp<BurgerParamList, T>
 }
 
+export type MapParamList = {
+  Map: undefined
+  Restaurant: Restaurant
+}
+
+export type MapNavProps<T extends keyof MapParamList> = {
+  navigation: StackNavigationProp<MapParamList, T>
+  route: RouteProp<MapParamList, T>
+}
+
 export type RestaurantParamList = {
   Restaurants: undefined
   Restaurant: Restaurant

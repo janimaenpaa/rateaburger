@@ -7,7 +7,7 @@ import { BurgerNavProps, Review } from "../../../types"
 import { Stars } from "../../../components/Stars"
 
 export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
-  const { imgUrl, name, description, reviews } = route.params
+  const { imgUrl, name, description, reviews, patty } = route.params
 
   const Img = imgUrl ? { uri: imgUrl } : require("../../../restaurantImg.jpg")
 
@@ -38,6 +38,9 @@ export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
         }}
       >
         <Text category="h2">{name}</Text>
+        <Text style={{ marginLeft: 4, marginBottom: 10 }} appearance="hint">
+          Patty: {patty}
+        </Text>
         <Text style={{ marginLeft: 4, marginBottom: 10 }}>{description}</Text>
         <Text category="h4">Reviews</Text>
         {reviews.length === 0 && <Text>No review yet...</Text>}
