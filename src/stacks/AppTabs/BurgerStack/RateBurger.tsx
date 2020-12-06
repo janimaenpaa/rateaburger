@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 import { Container } from "../../../components/Container"
 import { BurgerNavProps } from "../../../types"
 import { useForm, Controller } from "react-hook-form"
@@ -14,24 +14,15 @@ import { DataContext } from "../../../providers/DataProvider"
 import { View, StyleSheet } from "react-native"
 import { Picker } from "@react-native-picker/picker"
 import { AuthContext } from "../../../providers/AuthProvider"
-import AsyncStorage from "@react-native-community/async-storage"
 
 export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
-  const {
-    restaurants,
-    burgers,
-    reviews,
-    setBurgers,
-    setReviews,
-    refetch,
-  } = useContext(DataContext)
+  const { burgers, refetch } = useContext(DataContext)
   const { user } = useContext(AuthContext)
   const { control, handleSubmit, errors } = useForm()
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = (data: any) => {
     if (user) {
       const review = { ...data, stars: data.stars + 1, user: user.id }
-      console.log(review)
 
       fetch("https://rateaburger.herokuapp.com/api/reviews", {
         method: "POST",

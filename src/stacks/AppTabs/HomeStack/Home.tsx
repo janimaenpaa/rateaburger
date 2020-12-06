@@ -20,7 +20,7 @@ export const Home: React.FC<HomeProps> = () => {
       .slice(0, 4)
 
     setSortedReviews(sortReviews)
-  }, [])
+  }, [reviews])
 
   const renderItem = ({ item }: { item: Review }) => (
     <Card style={styles.card} key={item.id}>

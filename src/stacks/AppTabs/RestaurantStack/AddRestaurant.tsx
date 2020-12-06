@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useForm, Controller } from "react-hook-form"
-import { Alert, StyleSheet, Image } from "react-native"
+import { Alert, StyleSheet, Image, KeyboardAvoidingView } from "react-native"
 import { Text, Input, Button, Layout } from "@ui-kitten/components"
 import { Container } from "../../../components/Container"
 import { RestaurantNavProps } from "../../../types"
@@ -23,7 +23,7 @@ declare global {
 export const AddRestaurant = ({
   navigation,
 }: RestaurantNavProps<"AddRestaurant">) => {
-  const { restaurants, setRestaurants } = useContext(DataContext)
+  const { refetch } = useContext(DataContext)
   const [image, setImage] = useState<any>(null)
   const [uploadedImgUrl, setUploadedImgUrl] = useState<string | null>("")
   const { control, handleSubmit, errors } = useForm()
@@ -47,7 +47,7 @@ export const AddRestaurant = ({
       .then((response) => response.json())
       .then((json) => {
         console.log({ response: json })
-        setRestaurants([...restaurants, {...json, burgers: []}])
+        refetch()
       })
       .then(() => navigation.goBack())
       .catch((error) => console.log(error))
@@ -102,68 +102,70 @@ export const AddRestaurant = ({
   return (
     <Container>
       <Layout style={styles.layout}>
-        <Controller
-          control={control}
-          render={({ onChange, onBlur, value }) => (
-            <Input
-              label="Restaurant name"
-              placeholder="Restaurant name..."
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-            />
+        <KeyboardAvoidingView behavior="height" keyboardVerticalOffset={150}>
+          <Controller
+            control={control}
+            render={({ onChange, onBlur, value }) => (
+              <Input
+                label="Restaurant name"
+                placeholder="Restaurant name..."
+                style={styles.input}
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+              />
+            )}
+            name="name"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.name && <Text>Restaurant name is required.</Text>}
+          <Controller
+            control={control}
+            render={({ onChange, onBlur, value }) => (
+              <Input
+                label="Description"
+                placeholder="Description..."
+                style={styles.input}
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+              />
+            )}
+            name="description"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.description && <Text>Restaurant name is required.</Text>}
+          <Controller
+            control={control}
+            render={({ onChange, onBlur, value }) => (
+              <Input
+                label="Address"
+                placeholder="Streetname 123..."
+                style={styles.input}
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+              />
+            )}
+            name="address"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.address && <Text>Restaurant name is required.</Text>}
+          {image ? (
+            <Image source={{ uri: image }} style={styles.image} />
+          ) : (
+            <Image source={{ uri: noImg }} style={styles.image} />
           )}
-          name="name"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.name && <Text>Restaurant name is required.</Text>}
-        <Controller
-          control={control}
-          render={({ onChange, onBlur, value }) => (
-            <Input
-              label="Description"
-              placeholder="Description..."
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-            />
-          )}
-          name="description"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.description && <Text>Restaurant name is required.</Text>}
-        <Controller
-          control={control}
-          render={({ onChange, onBlur, value }) => (
-            <Input
-              label="Address"
-              placeholder="Streetname 123..."
-              style={styles.input}
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-            />
-          )}
-          name="address"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.address && <Text>Restaurant name is required.</Text>}
-        {image ? (
-          <Image source={{ uri: image }} style={styles.image} />
-        ) : (
-          <Image source={{ uri: noImg }} style={styles.image} />
-        )}
-        <Button status="info" onPress={handleImageUpload}>
-          Add Image
-        </Button>
-        <Button style={styles.button} onPress={handleSubmit(onSubmit)}>
-          Submit
-        </Button>
+          <Button status="info" onPress={handleImageUpload}>
+            Add Image
+          </Button>
+          <Button style={styles.button} onPress={handleSubmit(onSubmit)}>
+            Submit
+          </Button>
+        </KeyboardAvoidingView>
       </Layout>
     </Container>
   )

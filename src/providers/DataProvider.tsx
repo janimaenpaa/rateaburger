@@ -6,18 +6,12 @@ export const DataContext = React.createContext<{
   burgers: Burger[]
   reviews: Review[]
   loading: boolean
-  setRestaurants: React.Dispatch<React.SetStateAction<Restaurant[]>>
-  setBurgers: React.Dispatch<React.SetStateAction<Burger[]>>
-  setReviews: React.Dispatch<React.SetStateAction<Review[]>>
   refetch: () => void
 }>({
   restaurants: [],
   burgers: [],
   reviews: [],
   loading: true,
-  setRestaurants: () => {},
-  setBurgers: () => {},
-  setReviews: () => {},
   refetch: () => {},
 })
 
@@ -67,7 +61,7 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const refetch = () => {
     fetchBurgers()
       .then(fetchRestaurants)
-      .then(fetchRestaurants)
+      .then(fetchReviews)
       .catch((error) => console.log(error))
   }
 
@@ -78,9 +72,6 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
         burgers,
         reviews,
         loading,
-        setRestaurants,
-        setBurgers,
-        setReviews,
         refetch,
       }}
     >
