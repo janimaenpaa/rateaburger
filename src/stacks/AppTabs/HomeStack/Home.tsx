@@ -46,13 +46,6 @@ export const Home: React.FC<HomeProps> = () => {
     </Card>
   )
 
-  if (!sortedReviews)
-    return (
-      <Container style={{ alignItems: "center" }}>
-        <Text>No reviews...</Text>
-      </Container>
-    )
-
   if (loading) {
     return (
       <Container style={{ alignItems: "center" }}>
@@ -60,6 +53,13 @@ export const Home: React.FC<HomeProps> = () => {
       </Container>
     )
   }
+  
+  if (!sortedReviews)
+    return (
+      <Container style={{ alignItems: "center" }}>
+        <Text>No reviews...</Text>
+      </Container>
+    )
 
   return (
     <Container>

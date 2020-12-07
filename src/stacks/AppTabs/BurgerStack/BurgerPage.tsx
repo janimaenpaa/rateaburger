@@ -48,7 +48,7 @@ export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
         </Text>
         <Text style={{ marginLeft: 4, marginBottom: 10 }}>{description}</Text>
         <Text category="h4">Reviews</Text>
-        {reviews.length === 0 && <Text>No review yet...</Text>}
+        {reviews.length === 0 && <Text>No reviews yet...</Text>}
       </Layout>
     </>
   )

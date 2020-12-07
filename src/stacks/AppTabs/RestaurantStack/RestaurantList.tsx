@@ -11,7 +11,6 @@ export const RestaurantList = ({
   navigation,
 }: RestaurantNavProps<"Restaurants">) => {
   const { restaurants, loading } = useContext(DataContext)
-  console.log(restaurants)
 
   const renderItem = ({ item }: { item: Restaurant }) => (
     <Card
@@ -32,7 +31,7 @@ export const RestaurantList = ({
       )}
       onPress={() => navigation.navigate("Restaurant", item)}
     >
-      <Text>{item.name}</Text>
+      <Text style={{ fontWeight: "700" }}>{item.name}</Text>
       <Text>{item.description}</Text>
     </Card>
   )

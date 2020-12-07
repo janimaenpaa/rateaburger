@@ -14,25 +14,17 @@ export const Map = ({ navigation }: MapNavProps<"Map">) => {
   const [region, setRegion] = useState({
     latitude: 60.169877007627676,
     longitude: 24.938366007081427,
-    latitudeDelta: 0.03,
-    longitudeDelta: 0.03,
+    latitudeDelta: 0.06,
+    longitudeDelta: 0.06,
   })
 
   const getPhoneLocation = async () => {
     const { status } = await Location.requestPermissionsAsync()
 
     if (status === "granted") {
-      const phoneLocation = await Location.getCurrentPositionAsync({
+      await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.High,
       })
-
-      const result = {
-        ...region,
-        latitude: phoneLocation.coords.latitude,
-        longitude: phoneLocation.coords.longitude,
-      }
-
-      setRegion(result)
     } else {
       Alert.alert("No permission to access phone location")
     }
@@ -40,7 +32,6 @@ export const Map = ({ navigation }: MapNavProps<"Map">) => {
 
   useEffect(() => {
     getPhoneLocation()
-    console.log(restaurants)
   }, [])
 
   const markers = restaurants.map((restaurant: Restaurant) => (

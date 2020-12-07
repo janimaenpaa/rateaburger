@@ -23,6 +23,7 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
   const onSubmit = (data: any) => {
     if (user) {
       const review = { ...data, stars: data.stars + 1, user: user.id }
+      console.log(review)
 
       fetch("https://rateaburger.herokuapp.com/api/reviews", {
         method: "POST",
@@ -66,7 +67,7 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
           </>
         )}
         name="burger"
-        defaultValue={burgers[0].name}
+        defaultValue={burgers[0].id}
         rules={{ required: true }}
       />
       {errors.burger && (
