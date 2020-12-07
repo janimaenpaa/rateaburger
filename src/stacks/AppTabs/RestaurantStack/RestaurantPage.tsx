@@ -1,24 +1,16 @@
 import React from "react"
 import { Container } from "../../../components/Container"
 import { Card, Layout, List, Text } from "@ui-kitten/components"
-import { Image, ImageBackground } from "react-native"
-import { Burger, RestaurantNavProps } from "../../../types"
-import { ScrollView } from "react-native-gesture-handler"
-
-/* const CardRows = (burgers: Burger[]) =>
-  burgers.length === 0 ? (
-    <Card>
-      <Text>No burgers yet.</Text>
-    </Card>
-  ) : (
-    burgers.map((burger) => <BurgerCard key={burger.id} burger={burger} />)
-  ) */
+import { Image, StyleSheet } from "react-native"
+import { Burger, Restaurant, RestaurantNavProps } from "../../../types"
+import { restaurantRating } from "../../../utils"
 
 export const RestaurantPage = ({
   route,
   navigation,
 }: RestaurantNavProps<"Restaurant">) => {
   const { imgUrl, name, address, description, burgers } = route.params
+  const restaurant: Restaurant = route.params
 
   const Img = imgUrl ? { uri: imgUrl } : require("../../../restaurantImg.jpg")
 
@@ -45,19 +37,18 @@ export const RestaurantPage = ({
       <List
         ListHeaderComponent={
           <>
-            <ImageBackground
+            <Image
               resizeMode="cover"
               style={{ width: "100%", height: 260 }}
               source={Img}
-            >
-              <Text style={{ color: "white" }} category="h2">
-                5.0
-              </Text>
-            </ImageBackground>
+            />
 
             <Layout style={{ margin: 20, backgroundColor: "#F7F9FC", flex: 1 }}>
               <Text category="h2">{name}</Text>
               <Text style={{ marginLeft: 4, marginBottom: 10 }}>{address}</Text>
+              <Text style={styles.rating} category="h4">
+                {restaurantRating(restaurant)}
+              </Text>
               <Text style={{ marginLeft: 4, marginBottom: 10 }}>
                 {description}
               </Text>
@@ -71,3 +62,16 @@ export const RestaurantPage = ({
     </Container>
   )
 }
+
+const styles = StyleSheet.create({
+  rating: {
+    backgroundColor: "#FFC529",
+    color: "#fff",
+    fontWeight: "700",
+    width: 60,
+    height: 40,
+    textAlign: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+})

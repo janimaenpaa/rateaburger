@@ -1,10 +1,11 @@
 import React from "react"
 import { Card, Layout, List, Text } from "@ui-kitten/components"
-import { Image, ImageBackground } from "react-native"
+import { Image, StyleSheet } from "react-native"
 import { Container } from "../../../components/Container"
 import { BurgerNavProps, Review } from "../../../types"
 import { Stars } from "../../../components/Stars"
 import { format } from "date-fns"
+import { burgerRating } from "../../../utils"
 
 export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
   const { imgUrl, name, description, reviews, patty, date } = route.params
@@ -42,6 +43,9 @@ export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
         <Text style={{ marginLeft: 4, marginBottom: 10 }} appearance="hint">
           Patty: {patty}
         </Text>
+        <Text style={styles.rating} category="h4">
+          {burgerRating(reviews)}
+        </Text>
         <Text style={{ marginLeft: 4, marginBottom: 10 }}>{description}</Text>
         <Text category="h4">Reviews</Text>
         {reviews.length === 0 && <Text>No review yet...</Text>}
@@ -59,3 +63,16 @@ export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
     </Container>
   )
 }
+
+const styles = StyleSheet.create({
+  rating: {
+    backgroundColor: "#FFC529",
+    color: "#fff",
+    fontWeight: "700",
+    width: 60,
+    height: 40,
+    textAlign: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+})

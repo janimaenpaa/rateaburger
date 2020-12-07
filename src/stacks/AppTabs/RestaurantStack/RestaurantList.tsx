@@ -5,6 +5,7 @@ import { DataContext } from "../../../providers/DataProvider"
 import { Button, Card, Layout, List, Text } from "@ui-kitten/components"
 import { Restaurant, RestaurantNavProps } from "../../../types"
 import { useScrollToTop } from "@react-navigation/native"
+import { restaurantRating } from "../../../utils"
 
 export const RestaurantList = ({
   navigation,
@@ -24,8 +25,8 @@ export const RestaurantList = ({
       )}
       footer={() => (
         <Layout style={{ margin: 10, marginLeft: 20 }}>
-          <Text style={{ color: "#636363" }}>
-            burgers: {item.burgers.length}
+          <Text appearance="hint">
+            {restaurantRating(item)} / 5.0 | burgers: {item.burgers.length}
           </Text>
         </Layout>
       )}

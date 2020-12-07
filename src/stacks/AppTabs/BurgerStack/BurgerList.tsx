@@ -49,8 +49,7 @@ export const BurgerList = ({ navigation }: BurgerNavProps<"Burgers">) => {
       )}
       footer={() => (
         <Text style={styles.rating} category="s1" appearance="hint">
-          rating {burgerRating(item.reviews)} / 5.0 | {item.reviews.length}{" "}
-          reviews
+          {burgerRating(item.reviews)} / 5.0 | {item.reviews.length} reviews
         </Text>
       )}
     >

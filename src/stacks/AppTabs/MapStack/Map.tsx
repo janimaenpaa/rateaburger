@@ -56,7 +56,7 @@ export const Map = ({ navigation }: MapNavProps<"Map">) => {
         <Layout style={{ backgroundColor: "#fff", padding: 10 }}>
           <Text style={{ fontWeight: "bold" }}>{restaurant.name}</Text>
           <Text>{restaurant.burgers.length} burgers</Text>
-          <Stars value={restaurantRating(restaurant)} />
+          <Stars value={Number(restaurantRating(restaurant).toFixed(0))} />
         </Layout>
       </Callout>
     </Marker>

@@ -20,6 +20,6 @@ export const restaurantRating = (restaurant: Restaurant) => {
   return Number(
     (
       averages.reduce((a: number, b: number) => a + b, 0) / averages.length
-    ).toFixed(0)
+    ).toFixed(1)
   )
 }
