@@ -1,13 +1,13 @@
 import React from "react"
-import { Card, Layout, List, Text } from "@ui-kitten/components"
+import { Button, Card, Layout, List, Text } from "@ui-kitten/components"
 import { Image, StyleSheet } from "react-native"
 import { Container } from "../../../components/Container"
-import { BurgerNavProps, Review } from "../../../types"
+import { Burger, BurgerNavProps, Review } from "../../../types"
 import { Stars } from "../../../components/Stars"
 import { format } from "date-fns"
 import { burgerRating } from "../../../utils"
 
-export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
+export const BurgerPage = ({ navigation, route }: BurgerNavProps<"Burger">) => {
   const { imgUrl, name, description, reviews, patty, date } = route.params
 
   const Img = imgUrl ? { uri: imgUrl } : require("../../../restaurantImg.jpg")
@@ -48,6 +48,12 @@ export const BurgerPage = ({ route }: BurgerNavProps<"Burger">) => {
         </Text>
         <Text style={{ marginLeft: 4, marginBottom: 10 }}>{description}</Text>
         <Text category="h4">Reviews</Text>
+        <Button
+          style={{ marginTop: 10 }}
+          onPress={() => navigation.navigate("RateBurger")}
+        >
+          RATE BURGER
+        </Button>
         {reviews.length === 0 && <Text>No reviews yet...</Text>}
       </Layout>
     </>

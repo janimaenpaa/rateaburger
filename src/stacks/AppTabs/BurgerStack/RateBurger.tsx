@@ -37,7 +37,7 @@ export const RateBurger = ({ navigation }: BurgerNavProps<"RateBurger">) => {
           console.log(json)
           refetch()
         })
-        .then(() => navigation.goBack())
+        .then(() => navigation.navigate("Burgers"))
         .catch((error) => console.log(error))
     } else {
       console.log("error")
