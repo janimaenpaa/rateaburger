@@ -49,7 +49,7 @@ export const RestaurantList = ({
   useScrollToTop(ref)
 
   return (
-    <Container>
+    <Container style={{ justifyContent: "flex-start" }}>
       <Layout style={{ margin: 10 }}>
         <List
           ref={ref}

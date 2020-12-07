@@ -19,7 +19,7 @@ export const Carousel: React.FC<CarouselProps> = () => {
       .slice(0, 4)
 
     setSortedBurgers(sortBurgersByDateAndShow4Latest)
-  }, [])
+  }, [burgers])
 
   const renderItem = ({ item }: { item: Burger }) => (
     <TouchableOpacity onPress={() => navigation.navigate("Burger", item)}>
