@@ -25,12 +25,6 @@ RateABurger is a full stack React Native application where users can add restaur
 
 NPM and Expo CLI are required to run this app.
 
-To install NPM
-
-```
-npm install npm@latest -g
-```
-
 To install Expo CLI
 
 ```
@@ -53,6 +47,14 @@ Then install dependencies
 cd rateaburger
 npm install
 ``` 
+
+### Running the app
+
+To start the Expo client, type
+
+```
+npm start
+```
 
 ## Author
 
