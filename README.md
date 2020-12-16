@@ -14,6 +14,7 @@ RateABurger is a full stack React Native application where users can add restaur
 
 ### Backend: https://github.com/janimaenpaa/rateaburger-backend
 - Node.js
+- Express.js
 - TypeScript
 - TypeORM
 - PostgreSQL
